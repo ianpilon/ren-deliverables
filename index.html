@@ -661,19 +661,53 @@ This painful lesson became a core principle: Text > Brain 📝</div>
     <div class="section">
       <div class="section-title deliverables">✅ Milestones</div>
       <div class="cards">
-        <div class="card">
+        <div class="card" onclick="this.classList.toggle('expanded')">
           <div class="card-main">
+            <span class="card-toggle">▶</span>
             <div class="card-content">
               <div class="card-header"><div class="card-title">🧠 Observational Memory System</div></div>
               <div class="card-desc">Implemented Mastra-style memory: MEMORY.md (observations) + daily logs (buffer). Emoji priorities.</div>
             </div>
           </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 Architecture</div>
+            <div class="card-context-raw">Two-block memory architecture inspired by Mastra research:
+
+• <strong>MEMORY.md</strong> — Compressed observations (the distilled essence)
+• <strong>memory/YYYY-MM-DD.md</strong> — Daily logs (raw buffer before compression)
+
+Emoji priority levels:
+🔴 Important — Core facts, decisions, deadlines
+🟡 Maybe important — Context that might matter later
+🟢 Info only — Background, can be garbage collected first
+
+Compression cycle: Daily logs → Pattern recognition → Observations in MEMORY.md</div>
+            <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+              <a href="https://github.com/ianpilon/ren-workspace/blob/main/MEMORY.md" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; padding: 4px 10px; background: var(--accent-dim); border-radius: 4px;">→ MEMORY.md</a>
+              <a href="https://github.com/ianpilon/ren-workspace/tree/main/memory" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; padding: 4px 10px; background: var(--accent-dim); border-radius: 4px;">→ memory/ folder</a>
+              <a href="https://github.com/ianpilon/ren-workspace/blob/main/AGENTS.md" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; padding: 4px 10px; background: var(--accent-dim); border-radius: 4px;">→ AGENTS.md</a>
+            </div>
+          </div>
         </div>
-        <div class="card">
+        <div class="card" onclick="this.classList.toggle('expanded')">
           <div class="card-main">
+            <span class="card-toggle">▶</span>
             <div class="card-content">
               <div class="card-header"><div class="card-title">📜 Craft Principles Added</div></div>
               <div class="card-desc">Added to SOUL.md: Explicit > clever, know when NOT to, design for long runs, external access = high risk.</div>
+            </div>
+          </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 Principles Added</div>
+            <div class="card-context-raw">From OpenAI's Skills/Shell/Compaction article:
+
+• <strong>Explicit > clever</strong> — Clear contracts beat fuzzy routing
+• <strong>Know when NOT to</strong> — Negative examples matter
+• <strong>Design for long runs</strong> — Build continuity, not one-shots
+• <strong>Templates in skills</strong> — Don't bloat every interaction
+• <strong>External access = high risk</strong> — Be paranoid about exfiltration</div>
+            <div style="margin-top: 12px;">
+              <a href="https://github.com/ianpilon/ren-workspace/blob/main/SOUL.md" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; padding: 4px 10px; background: var(--accent-dim); border-radius: 4px;">→ SOUL.md</a>
             </div>
           </div>
         </div>
