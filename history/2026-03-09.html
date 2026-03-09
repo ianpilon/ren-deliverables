@@ -54,12 +54,22 @@
   .convo-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
   
   .cards { display: grid; gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
-  .card:hover { background: var(--surface-hover); border-color: var(--accent); transform: translateY(-2px); }
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; }
+  .card-main { padding: 20px 24px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; transition: background 0.2s; }
+  .card-main:hover { background: var(--surface-hover); }
+  .card-toggle { color: var(--text-dim); font-size: 0.8rem; transition: transform 0.2s; flex-shrink: 0; margin-top: 4px; }
+  .card.expanded .card-toggle { transform: rotate(90deg); }
+  .card-content { flex: 1; }
   .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
   .card-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .card-timestamp { font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); white-space: nowrap; background: var(--bg); padding: 4px 8px; border-radius: 4px; }
   .card-desc { color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; }
+  .card-context { display: none; padding: 0 24px 20px 48px; border-top: 1px solid var(--border); }
+  .card.expanded .card-context { display: block; }
+  .card-context-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--amber); margin: 16px 0 8px 0; }
+  .card-context-raw { background: var(--bg); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
+  .card-context-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
   .badge { font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
   .badge-html { background: rgba(34,211,238,0.15); color: var(--accent); }
   .badge-md { background: rgba(52,211,153,0.15); color: var(--green); }
@@ -153,46 +163,111 @@
   <div class="section">
     <div class="section-title homework">🌙 Overnight Homework</div>
     <div class="cards">
-      <a href="../ren-architecture.html" class="card">
-        <div class="card-header">
-          <div class="card-title">Ren System Architecture <span class="badge badge-html">HTML</span></div>
-          <div class="card-timestamp">3:15 AM</div>
+      <div class="card" onclick="event.preventDefault(); this.classList.toggle('expanded')">
+        <div class="card-main">
+          <span class="card-toggle">▶</span>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">Ren System Architecture <span class="badge badge-html">HTML</span></div>
+              <div class="card-timestamp">3:15 AM</div>
+            </div>
+            <div class="card-desc">Full visual design — channels, gateway, memory system, tools, automation, OpenOrca relationship. Blueprint aesthetic with Mermaid diagrams.</div>
+          </div>
         </div>
-        <div class="card-desc">Full visual design — channels, gateway, memory system, tools, automation, OpenOrca relationship. Blueprint aesthetic with Mermaid diagrams.</div>
-      </a>
-      <a href="../viewer.html?file=research/deerflow-deep-dive.md" class="card">
-        <div class="card-header">
-          <div class="card-title">DeerFlow Deep Dive <span class="badge badge-md">MD</span></div>
-          <div class="card-timestamp">2:30 AM</div>
+        <div class="card-context">
+          <div class="card-context-label">📍 Why this was requested</div>
+          <div class="card-context-raw">"Homework: https://github.com/nicobailon/visual-explainer
+
+I need you to build an HTML visual design of your architecture tonight when I sleep"</div>
+          <div class="card-context-meta">Mar 8 @ 4:38 PM • message_id: 3B7B69F699E53C1E53339160B3B6218F</div>
+          <a href="../ren-architecture.html" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
         </div>
-        <div class="card-desc">ByteDance's SuperAgent harness — sub-agent orchestration, Docker sandboxes, MCP servers. Compared to Symphony and Fractals.</div>
-      </a>
-      <a href="../viewer.html?file=research/autoresearch-analysis.md" class="card">
-        <div class="card-header">
-          <div class="card-title">Autoresearch Analysis <span class="badge badge-md">MD</span></div>
-          <div class="card-timestamp">3:00 AM</div>
+      </div>
+      <div class="card" onclick="event.preventDefault(); this.classList.toggle('expanded')">
+        <div class="card-main">
+          <span class="card-toggle">▶</span>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">DeerFlow Deep Dive <span class="badge badge-md">MD</span></div>
+              <div class="card-timestamp">2:30 AM</div>
+            </div>
+            <div class="card-desc">ByteDance's SuperAgent harness — sub-agent orchestration, Docker sandboxes, MCP servers. Compared to Symphony and Fractals.</div>
+          </div>
         </div>
-        <div class="card-desc">Karpathy's "programming the program.md" pattern — autonomous overnight experiments, keep/discard loops.</div>
-      </a>
-      <a href="../viewer.html?file=openorca/implementation-log.md" class="card">
-        <div class="card-header">
-          <div class="card-title">OpenOrca Phase 1 Analysis <span class="badge badge-md">MD</span></div>
-          <div class="card-timestamp">3:45 AM</div>
+        <div class="card-context">
+          <div class="card-context-label">📍 Why this was requested</div>
+          <div class="card-context-raw">"add to homework tonight: https://github.com/bytedance/deer-flow"</div>
+          <div class="card-context-meta">Mar 8 @ 11:15 PM • message_id: 3BCF495F64CA0DC07E1A</div>
+          <a href="../viewer.html?file=research/deerflow-deep-dive.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
         </div>
-        <div class="card-desc">Architecture mapping, agent registration API design, sub-agent roles defined.</div>
-      </a>
+      </div>
+      <div class="card" onclick="event.preventDefault(); this.classList.toggle('expanded')">
+        <div class="card-main">
+          <span class="card-toggle">▶</span>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">Autoresearch Analysis <span class="badge badge-md">MD</span></div>
+              <div class="card-timestamp">3:00 AM</div>
+            </div>
+            <div class="card-desc">Karpathy's "programming the program.md" pattern — autonomous overnight experiments, keep/discard loops.</div>
+          </div>
+        </div>
+        <div class="card-context">
+          <div class="card-context-label">📍 Why this was requested</div>
+          <div class="card-context-raw">"also research this for homework toight: https://github.com/karpathy/autoresearch"</div>
+          <div class="card-context-meta">Mar 8 @ 11:19 PM • message_id: 3B4E26B1E3B3CB5D9D1A</div>
+          <a href="../viewer.html?file=research/autoresearch-analysis.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+        </div>
+      </div>
+      <div class="card" onclick="event.preventDefault(); this.classList.toggle('expanded')">
+        <div class="card-main">
+          <span class="card-toggle">▶</span>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">OpenOrca Phase 1 Analysis <span class="badge badge-md">MD</span></div>
+              <div class="card-timestamp">3:45 AM</div>
+            </div>
+            <div class="card-desc">Architecture mapping, agent registration API design, sub-agent roles defined.</div>
+          </div>
+        </div>
+        <div class="card-context">
+          <div class="card-context-label">📍 Why this was requested</div>
+          <div class="card-context-raw">"now a job I want you to do after your done your home work is to start using Karpathy's overnight autonomous research to figure out how to actually get you inside this GUI with 3-5 other sub agents so that we can test a real working scenario of how a team of agents would look in this GUI https://github.com/ianpilon/OpenOrca...
+
+The goal is that I should be able to type a prompt somewhere in the OpenOrca UI and ask it to do a goal, then the system can spin up or use multiple agents in order to reach the goal."</div>
+          <div class="card-context-meta">Mar 8 @ 11:27 PM • message_id: 3BCF495F64CA0DC07E1A</div>
+          <a href="../viewer.html?file=openorca/implementation-log.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+        </div>
+      </div>
     </div>
   </div>
   
   <div class="section">
     <div class="section-title deliverables">✅ Deliverables Built Today</div>
     <div class="cards">
-      <div class="card" style="cursor: default;">
-        <div class="card-header">
-          <div class="card-title">Ren Deliverables → Interaction History Site</div>
-          <div class="card-timestamp">8:27 AM - 9:08 AM</div>
+      <div class="card" onclick="this.classList.toggle('expanded')">
+        <div class="card-main">
+          <span class="card-toggle">▶</span>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">Ren Deliverables → Interaction History Site</div>
+              <div class="card-timestamp">8:27 AM - 9:23 AM</div>
+            </div>
+            <div class="card-desc">Created GitHub Pages site with: index page, markdown viewer, timestamped cards, clickable history pages, horizontal timeline. Transformed into full interaction history system with expandable context.</div>
+          </div>
         </div>
-        <div class="card-desc">Created GitHub Pages site with: index page, markdown viewer, timestamped cards, clickable history pages, horizontal timeline, chronological order. Transformed into full interaction history system.</div>
+        <div class="card-context">
+          <div class="card-context-label">📍 Why this was requested</div>
+          <div class="card-context-raw">"are all of these files saved locally on my machine? ... can you push all the new files to a github page so I don't need to go looking around for them on my computer?"
+
+Then evolved through multiple requests:
+• Add timestamps (8:37 AM)
+• Make history clickable (8:51 AM)
+• Horizontal timeline (8:59 AM)
+• Transform to Interaction History (9:08 AM)
+• Add expandable context (9:23 AM)</div>
+          <div class="card-context-meta">Multiple conversations • 8:26 AM - 9:23 AM</div>
+        </div>
       </div>
     </div>
   </div>
