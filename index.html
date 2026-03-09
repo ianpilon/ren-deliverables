@@ -70,10 +70,32 @@
   .subtitle {
     color: var(--text-dim);
     font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  
+  .last-updated {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  
+  .last-updated strong {
+    color: var(--accent);
   }
   
   .section {
     margin-bottom: 40px;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
   }
   
   .section-title {
@@ -82,7 +104,6 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--accent);
-    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -118,14 +139,31 @@
     transform: translateY(-2px);
   }
   
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  
   .card-title {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 6px;
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+  }
+  
+  .card-timestamp {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    white-space: nowrap;
+    background: var(--bg);
+    padding: 4px 8px;
+    border-radius: 4px;
   }
   
   .card-desc {
@@ -160,6 +198,48 @@
     color: var(--accent);
     text-decoration: none;
   }
+  
+  .history {
+    margin-top: 48px;
+  }
+  
+  .history-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  
+  .history-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .history-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .history-item:last-child {
+    border-bottom: none;
+  }
+  
+  .history-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    min-width: 140px;
+  }
+  
+  .history-text {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
 </style>
 </head>
 <body>
@@ -167,16 +247,24 @@
   <header>
     <h1>🐋 Ren Deliverables</h1>
     <p class="subtitle">Research, diagrams, and implementation work for OpenOrca</p>
+    <div class="last-updated">
+      Last updated: <strong>March 9, 2026 @ 8:30 AM EDT</strong>
+    </div>
   </header>
   
   <div class="section">
-    <div class="section-title">Visual Architecture</div>
+    <div class="section-header">
+      <div class="section-title">Visual Architecture</div>
+    </div>
     <div class="cards">
       <a href="ren-architecture.html" class="card">
-        <div class="card-title">
-          Ren System Architecture
-          <span class="badge badge-html">HTML</span>
-          <span class="badge badge-new">NEW</span>
+        <div class="card-header">
+          <div class="card-title">
+            Ren System Architecture
+            <span class="badge badge-html">HTML</span>
+            <span class="badge badge-new">NEW</span>
+          </div>
+          <div class="card-timestamp">Mar 9 @ 3:15 AM</div>
         </div>
         <div class="card-desc">
           Full visual design of Ren's architecture — channels, gateway, memory system, tools, automation, and OpenOrca relationship. Blueprint aesthetic with Mermaid diagrams and CSS Grid cards.
@@ -186,13 +274,18 @@
   </div>
   
   <div class="section">
-    <div class="section-title">OpenOrca Implementation</div>
+    <div class="section-header">
+      <div class="section-title">OpenOrca Implementation</div>
+    </div>
     <div class="cards">
       <a href="viewer.html?file=openorca/implementation-log.md" class="card">
-        <div class="card-title">
-          OpenOrca Integration Log
-          <span class="badge badge-md">MD</span>
-          <span class="badge badge-new">NEW</span>
+        <div class="card-header">
+          <div class="card-title">
+            OpenOrca Integration Log
+            <span class="badge badge-md">MD</span>
+            <span class="badge badge-new">NEW</span>
+          </div>
+          <div class="card-timestamp">Mar 9 @ 3:45 AM</div>
         </div>
         <div class="card-desc">
           Phase 1 analysis — architecture mapping, agent registration API design, sub-agent roles. Ready for implementation.
@@ -202,50 +295,67 @@
   </div>
   
   <div class="section">
-    <div class="section-title">Research Briefs</div>
+    <div class="section-header">
+      <div class="section-title">Research Briefs</div>
+    </div>
     <div class="cards">
       <a href="viewer.html?file=research/deerflow-deep-dive.md" class="card">
-        <div class="card-title">
-          DeerFlow Deep Dive
-          <span class="badge badge-md">MD</span>
-          <span class="badge badge-new">NEW</span>
+        <div class="card-header">
+          <div class="card-title">
+            DeerFlow Deep Dive
+            <span class="badge badge-md">MD</span>
+            <span class="badge badge-new">NEW</span>
+          </div>
+          <div class="card-timestamp">Mar 9 @ 2:30 AM</div>
         </div>
         <div class="card-desc">
           ByteDance's SuperAgent harness — sub-agent orchestration, Docker sandboxes, MCP servers, IM channels. Compared to Symphony and Fractals.
         </div>
       </a>
       <a href="viewer.html?file=research/autoresearch-analysis.md" class="card">
-        <div class="card-title">
-          Autoresearch Analysis
-          <span class="badge badge-md">MD</span>
-          <span class="badge badge-new">NEW</span>
+        <div class="card-header">
+          <div class="card-title">
+            Autoresearch Analysis
+            <span class="badge badge-md">MD</span>
+            <span class="badge badge-new">NEW</span>
+          </div>
+          <div class="card-timestamp">Mar 9 @ 3:00 AM</div>
         </div>
         <div class="card-desc">
           Karpathy's "programming the program.md" pattern — autonomous overnight experiments, keep/discard loops, NEVER STOP autonomy.
         </div>
       </a>
       <a href="viewer.html?file=research/gigabrain-self-improvement-analysis.md" class="card">
-        <div class="card-title">
-          Gigabrain Self-Improvement Analysis
-          <span class="badge badge-md">MD</span>
+        <div class="card-header">
+          <div class="card-title">
+            Gigabrain Self-Improvement Analysis
+            <span class="badge badge-md">MD</span>
+          </div>
+          <div class="card-timestamp">Mar 8 @ 12:30 AM</div>
         </div>
         <div class="card-desc">
           Memory plugin evaluation — SQLite registry, semantic dedupe, quality gates, nightly maintenance. Recommendations for my own upgrades.
         </div>
       </a>
       <a href="viewer.html?file=research/gigabrain-openorca-integration-brief.md" class="card">
-        <div class="card-title">
-          Gigabrain → OpenOrca Integration
-          <span class="badge badge-md">MD</span>
+        <div class="card-header">
+          <div class="card-title">
+            Gigabrain → OpenOrca Integration
+            <span class="badge badge-md">MD</span>
+          </div>
+          <div class="card-timestamp">Mar 8 @ 1:00 AM</div>
         </div>
         <div class="card-desc">
           Federated memory architecture — private/team/global tiers, cross-agent recall, TrustGraph bridge for verified facts.
         </div>
       </a>
       <a href="viewer.html?file=research/katrina-schleisman-profile.md" class="card">
-        <div class="card-title">
-          Katrina Schleisman — Podcast Prep
-          <span class="badge badge-md">MD</span>
+        <div class="card-header">
+          <div class="card-title">
+            Katrina Schleisman — Podcast Prep
+            <span class="badge badge-md">MD</span>
+          </div>
+          <div class="card-timestamp">Mar 8 @ 4:00 AM</div>
         </div>
         <div class="card-desc">
           Research profile for Michael Levin podcast guest. Background, recent work, 15 discussion questions, conversation bridges.
@@ -254,8 +364,22 @@
     </div>
   </div>
   
+  <div class="history">
+    <div class="history-title">📅 Delivery History</div>
+    <div class="history-list">
+      <div class="history-item">
+        <div class="history-date">Mar 9, 2026</div>
+        <div class="history-text">Ren Architecture Diagram, DeerFlow Deep Dive, Autoresearch Analysis, OpenOrca Phase 1</div>
+      </div>
+      <div class="history-item">
+        <div class="history-date">Mar 8, 2026</div>
+        <div class="history-text">Gigabrain briefs (self-improvement + OpenOrca integration), Katrina Schleisman profile</div>
+      </div>
+    </div>
+  </div>
+  
   <div class="meta">
-    Last updated: March 9, 2026 &bull; <a href="https://github.com/ianpilon/ren-deliverables">View on GitHub</a>
+    <a href="https://github.com/ianpilon/ren-deliverables">View on GitHub</a> &bull; Updated automatically by overnight elves 🧵
   </div>
 </div>
 </body>
