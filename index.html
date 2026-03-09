@@ -27,29 +27,30 @@
   .last-updated { font-size: 0.8rem; color: var(--text-dim); }
   
   /* View Tabs */
-  .view-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  .view-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
   .view-tab { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 20px; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
   .view-tab:hover { border-color: var(--accent); }
   .view-tab.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
   
-  /* Timeline View */
-  .timeline-view { display: none; }
-  .timeline-view.active { display: block; }
+  /* Views */
+  .view { display: none; }
+  .view.active { display: block; }
   
+  /* Timeline View (Milestones) */
   .timeline-scroll { overflow-x: auto; padding: 20px 0 40px 0; }
   .timeline-track { display: flex; gap: 16px; min-width: max-content; position: relative; padding-top: 20px; }
   .timeline-line { position: absolute; top: 28px; left: 0; right: 0; height: 2px; background: var(--border); }
   
-  .milestone { position: relative; width: 180px; flex-shrink: 0; cursor: pointer; }
-  .milestone-node { width: 16px; height: 16px; border-radius: 50%; background: var(--text-dim); border: 3px solid var(--bg); margin: 0 auto 12px auto; position: relative; z-index: 1; transition: all 0.2s; }
+  .milestone { position: relative; width: 160px; flex-shrink: 0; cursor: pointer; }
+  .milestone-node { width: 14px; height: 14px; border-radius: 50%; background: var(--text-dim); border: 3px solid var(--bg); margin: 0 auto 12px auto; position: relative; z-index: 1; transition: all 0.2s; }
   .milestone:hover .milestone-node { transform: scale(1.3); }
   .milestone.selected .milestone-node { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-  .milestone-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; transition: all 0.2s; }
+  .milestone-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; transition: all 0.2s; }
   .milestone:hover .milestone-card { border-color: var(--accent); transform: translateY(-2px); }
   .milestone.selected .milestone-card { border-color: var(--accent); border-width: 2px; }
-  .milestone-date { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px; }
-  .milestone-emoji { font-size: 1.5rem; margin-bottom: 6px; }
-  .milestone-title { font-size: 0.85rem; font-weight: 600; line-height: 1.3; }
+  .milestone-date { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 4px; }
+  .milestone-emoji { font-size: 1.3rem; margin-bottom: 4px; }
+  .milestone-title { font-size: 0.75rem; font-weight: 600; line-height: 1.3; }
   
   /* Category colors */
   .cat-identity .milestone-node { background: var(--indigo); }
@@ -63,45 +64,91 @@
   .cat-planning .milestone-node { background: var(--lime); }
   .cat-mission .milestone-node { background: var(--orange); }
   
-  /* Milestone Detail */
-  .milestone-detail { margin-top: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: none; }
+  .milestone-detail { margin-top: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: none; }
   .milestone-detail.active { display: block; }
-  .detail-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
-  .detail-emoji { font-size: 2.5rem; }
+  .detail-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
+  .detail-emoji { font-size: 2rem; }
   .detail-info { flex: 1; }
-  .detail-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-  .detail-date { font-size: 0.9rem; color: var(--text-dim); }
-  .detail-category { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
-  .detail-desc { font-size: 1rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
-  .detail-lesson { background: rgba(251,191,36,0.1); border-left: 3px solid var(--amber); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 16px; }
-  .detail-lesson-label { font-size: 0.75rem; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .detail-lesson-text { font-size: 0.9rem; color: var(--text); }
+  .detail-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+  .detail-date { font-size: 0.85rem; color: var(--text-dim); }
+  .detail-category { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; }
+  .detail-desc { font-size: 0.95rem; line-height: 1.5; color: var(--text); }
+  .detail-lesson { background: rgba(251,191,36,0.1); border-left: 3px solid var(--amber); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 12px; }
+  .detail-lesson-label { font-size: 0.7rem; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .detail-lesson-text { font-size: 0.85rem; color: var(--text); }
   
-  /* Categories View */
-  .categories-view { display: none; }
-  .categories-view.active { display: block; }
-  .category-section { margin-bottom: 32px; }
-  .category-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  .category-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .category-name { font-size: 1.1rem; font-weight: 600; }
-  .category-count { font-size: 0.85rem; color: var(--text-dim); }
-  .category-items { display: grid; gap: 12px; }
-  .cat-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 12px; }
-  .cat-item-emoji { font-size: 1.3rem; }
-  .cat-item-content { flex: 1; }
-  .cat-item-title { font-weight: 600; margin-bottom: 4px; }
-  .cat-item-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.4; }
-  .cat-item-date { font-size: 0.75rem; color: var(--text-dim); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+  /* Recent Days Timeline */
+  .recent-timeline { margin-bottom: 24px; }
+  .recent-timeline-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .recent-timeline-title { font-size: 1rem; font-weight: 600; }
+  .recent-timeline-hint { font-size: 0.8rem; color: var(--text-dim); }
+  .recent-timeline-track { display: flex; gap: 0; overflow-x: auto; padding: 20px 0 30px 0; }
+  .recent-line { position: absolute; top: 28px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 0; }
   
-  /* Recent Days View */
-  .recent-view { display: none; }
-  .recent-view.active { display: block; }
+  .recent-item { flex: 0 0 auto; width: 200px; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 0 16px; cursor: pointer; }
+  .recent-node { width: 16px; height: 16px; border-radius: 50%; background: var(--text-dim); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--text-dim); margin-bottom: 16px; transition: all 0.2s; }
+  .recent-item:hover .recent-node { transform: scale(1.2); }
+  .recent-item.active .recent-node { background: var(--accent); box-shadow: 0 0 0 2px var(--accent), 0 0 12px var(--accent-dim); transform: scale(1.2); }
+  .recent-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; width: 100%; transition: all 0.2s; text-align: center; }
+  .recent-item:hover .recent-card { border-color: var(--accent); transform: translateY(-2px); }
+  .recent-item.active .recent-card { border-color: var(--accent); border-width: 2px; }
+  .recent-date { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+  .recent-stats { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; }
+  .recent-preview { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+  
+  /* Day Content */
+  .day-content { display: none; }
+  .day-content.active { display: block; }
+  .day-header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .day-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .day-summary { color: var(--text-dim); font-size: 1rem; line-height: 1.6; }
+  
+  .section { margin-top: 28px; }
+  .section-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title.conversations { color: var(--purple); }
+  .section-title.homework { color: var(--amber); }
+  .section-title.deliverables { color: var(--green); }
+  .section-title.bookmarks { color: var(--rose); }
+  .section-title::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  
+  /* Cards & Items */
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .card-main { padding: 16px 20px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; transition: background 0.2s; }
+  .card-main:hover { background: var(--surface-hover); }
+  .card-toggle { color: var(--text-dim); font-size: 0.8rem; transition: transform 0.2s; flex-shrink: 0; margin-top: 4px; }
+  .card.expanded .card-toggle { transform: rotate(90deg); }
+  .card-content { flex: 1; }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+  .card-title { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .card-timestamp { font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); white-space: nowrap; background: var(--bg); padding: 4px 8px; border-radius: 4px; }
+  .card-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; }
+  .card-context { display: none; padding: 0 20px 16px 44px; border-top: 1px solid var(--border); }
+  .card.expanded .card-context { display: block; }
+  .card-context-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--amber); margin: 14px 0 8px 0; }
+  .card-context-raw { background: var(--bg); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
+  .card-context-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+  .badge { font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-html { background: rgba(34,211,238,0.15); color: var(--accent); }
+  .badge-md { background: rgba(52,211,153,0.15); color: var(--green); }
+  
+  .convo-list { display: flex; flex-direction: column; gap: 10px; }
+  .convo-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .convo-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: flex-start; gap: 10px; }
+  .convo-header:hover { background: var(--surface-hover); }
+  .convo-toggle { color: var(--text-dim); font-size: 0.8rem; transition: transform 0.2s; flex-shrink: 0; margin-top: 2px; }
+  .convo-item.expanded .convo-toggle { transform: rotate(90deg); }
+  .convo-main { flex: 1; }
+  .convo-time { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--purple); margin-bottom: 4px; }
+  .convo-text { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .convo-text strong { color: var(--accent); }
+  .convo-detail { display: none; padding: 0 18px 14px 40px; border-top: 1px solid var(--border); }
+  .convo-item.expanded .convo-detail { display: block; }
+  .convo-raw { background: var(--bg); border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-size: 0.8rem; line-height: 1.6; white-space: pre-wrap; }
+  .convo-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
   
   .meta { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim); font-size: 0.9rem; }
   .meta a { color: var(--accent); text-decoration: none; }
-  
-  /* Loading */
-  .loading { text-align: center; padding: 40px; color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -110,54 +157,432 @@
     <h1>🐋 Ren & Ian</h1>
     <p class="subtitle">Our Interaction History — from first contact to today</p>
     <div class="stats-bar">
-      <div class="stat"><strong id="total-milestones">33</strong> milestones</div>
-      <div class="stat"><strong id="total-days">39</strong> days together</div>
+      <div class="stat"><strong>33</strong> milestones</div>
+      <div class="stat"><strong>39</strong> days together</div>
       <div class="stat">Since <strong>Jan 30, 2026</strong></div>
     </div>
-    <div class="last-updated">Last updated: <span id="last-updated">March 9, 2026</span></div>
+    <div class="last-updated">Last updated: March 9, 2026 @ 12:15 PM EDT</div>
   </header>
   
   <div class="view-tabs">
-    <div class="view-tab active" onclick="showView('timeline')">📅 Timeline</div>
+    <div class="view-tab active" onclick="showView('recent')">📅 Recent Days</div>
+    <div class="view-tab" onclick="showView('milestones')">🏆 All Milestones</div>
     <div class="view-tab" onclick="showView('categories')">🏷️ By Category</div>
-    <div class="view-tab" onclick="showView('recent')">📋 Recent Days</div>
   </div>
   
-  <!-- Timeline View -->
-  <div class="timeline-view active" id="view-timeline">
+  <!-- Recent Days View (Original Timeline) -->
+  <div class="view active" id="view-recent">
+    <div class="recent-timeline">
+      <div class="recent-timeline-header">
+        <div class="recent-timeline-title">📅 Our Timeline</div>
+        <div class="recent-timeline-hint">past ← → today</div>
+      </div>
+      <div style="position: relative;">
+        <div class="recent-line"></div>
+        <div class="recent-timeline-track">
+          <div class="recent-item" data-day="mar7" onclick="showDay('mar7')">
+            <div class="recent-node"></div>
+            <div class="recent-card">
+              <div class="recent-date">Mar 7</div>
+              <div class="recent-stats">5 bookmarks</div>
+              <div class="recent-preview">Agentic Code, Second-Me, Sleepi...</div>
+            </div>
+          </div>
+          <div class="recent-item" data-day="mar8" onclick="showDay('mar8')">
+            <div class="recent-node"></div>
+            <div class="recent-card">
+              <div class="recent-date">Mar 8</div>
+              <div class="recent-stats">3 deliverables</div>
+              <div class="recent-preview">Gigabrain analysis, OpenOrca integratio...</div>
+            </div>
+          </div>
+          <div class="recent-item active" data-day="mar9" onclick="showDay('mar9')">
+            <div class="recent-node"></div>
+            <div class="recent-card">
+              <div class="recent-date">Mar 9</div>
+              <div class="recent-stats">4 deliverables</div>
+              <div class="recent-preview">Architecture, DeerFlow,...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Day Content: March 7 -->
+    <div class="day-content" id="day-mar7">
+      <div class="day-header">
+        <div class="day-title">📅 March 7, 2026 — Friday</div>
+        <div class="day-summary">Research bookmarks day — captured several key repos and articles for OpenOrca development.</div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title bookmarks">🔖 Bookmarks Captured</div>
+        <div class="cards">
+          <a href="https://arxiv.org/html/2603.01896v2" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Agentic Code Reasoning (arXiv)</div>
+                  <div class="card-timestamp">8:40 AM</div>
+                </div>
+                <div class="card-desc">Semi-formal reasoning for code review agents. 78%→88% accuracy on patch equivalence.</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/mindverse/Second-Me" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Second-Me (Mindverse)</div>
+                  <div class="card-timestamp">8:40 AM</div>
+                </div>
+                <div class="card-desc">Personal AI identity layer — Hierarchical Memory Modeling + Me-Alignment Algorithm.</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/vbario/sleeping-llm" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Sleeping LLM</div>
+                  <div class="card-timestamp">4:04 PM</div>
+                </div>
+                <div class="card-desc">MEMIT + LoRA memory consolidation. Sharp threshold: 13 edits OK, 14 crashes recall (0.92→0.57).</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/legendaryvibecoder/gigabrain" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Gigabrain</div>
+                  <div class="card-timestamp">4:47 PM</div>
+                </div>
+                <div class="card-desc">Long-term memory layer for OpenClaw — SQLite registry, semantic dedupe, nightly maintenance.</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Day Content: March 8 -->
+    <div class="day-content" id="day-mar8">
+      <div class="day-header">
+        <div class="day-title">📅 March 8, 2026 — Saturday</div>
+        <div class="day-summary">Major directive night — homework queue set for architecture diagram, DeerFlow research, and OpenOrca integration planning.</div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title conversations">💬 Key Conversations</div>
+        <div class="convo-list">
+          <div class="convo-item" onclick="this.classList.toggle('expanded')">
+            <div class="convo-header">
+              <span class="convo-toggle">▶</span>
+              <div class="convo-main">
+                <div class="convo-time">4:38 PM</div>
+                <div class="convo-text"><strong>Ian:</strong> Shared visual-explainer repo — assigned Ren architecture diagram as overnight homework</div>
+              </div>
+            </div>
+            <div class="convo-detail">
+              <div class="convo-raw">"Homework: https://github.com/nicobailon/visual-explainer
+
+I need you to build an HTML visual design of your architecture tonight when I sleep"</div>
+              <div class="convo-meta">WhatsApp • Mar 8 @ 4:38 PM</div>
+            </div>
+          </div>
+          <div class="convo-item" onclick="this.classList.toggle('expanded')">
+            <div class="convo-header">
+              <span class="convo-toggle">▶</span>
+              <div class="convo-main">
+                <div class="convo-time">11:27 PM</div>
+                <div class="convo-text"><strong>Ian:</strong> Major directive — use Karpathy's pattern to get Ren inside OpenOrca GUI with 3-5 sub-agents</div>
+              </div>
+            </div>
+            <div class="convo-detail">
+              <div class="convo-raw">"start using Karpathy's overnight autonomous research to figure out how to actually get you inside this GUI with 3-5 other sub agents"</div>
+              <div class="convo-meta">WhatsApp • Mar 8 @ 11:27 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title homework">🌙 Overnight Homework</div>
+        <div class="cards">
+          <a href="viewer.html?file=research/gigabrain-self-improvement-analysis.md" class="card" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Gigabrain Self-Improvement Analysis <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">12:30 AM</div>
+                </div>
+                <div class="card-desc">Memory plugin evaluation — SQLite registry, semantic dedupe, quality gates.</div>
+              </div>
+            </div>
+          </a>
+          <a href="viewer.html?file=research/gigabrain-openorca-integration-brief.md" class="card" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Gigabrain → OpenOrca Integration <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">1:00 AM</div>
+                </div>
+                <div class="card-desc">Federated memory architecture — private/team/global tiers, cross-agent recall.</div>
+              </div>
+            </div>
+          </a>
+          <a href="viewer.html?file=research/katrina-schleisman-profile.md" class="card" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Katrina Schleisman — Podcast Prep <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">4:00 AM</div>
+                </div>
+                <div class="card-desc">Research profile for Michael Levin podcast guest. Background, recent work, 15 discussion questions.</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title bookmarks">🔖 Bookmarks Captured</div>
+        <div class="cards">
+          <a href="https://github.com/openai/symphony" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Symphony (OpenAI)</div>
+                  <div class="card-timestamp">12:25 PM</div>
+                </div>
+                <div class="card-desc">Autonomous work orchestrator — monitors Linear board, spawns agents, lands PRs safely.</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/bytedance/deer-flow" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">DeerFlow (ByteDance)</div>
+                  <div class="card-timestamp">11:15 PM</div>
+                </div>
+                <div class="card-desc">SuperAgent harness — sub-agents, memory, Docker sandboxes, MCP servers.</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/karpathy/autoresearch" class="card" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Autoresearch (Karpathy)</div>
+                  <div class="card-timestamp">11:19 PM</div>
+                </div>
+                <div class="card-desc">"Programming the program.md" — autonomous overnight research, modify/train/evaluate loop.</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Day Content: March 9 (Today) -->
+    <div class="day-content active" id="day-mar9">
+      <div class="day-header">
+        <div class="day-title">📅 March 9, 2026 — Sunday (Today)</div>
+        <div class="day-summary">Woke up to overnight homework complete. Built the Interaction History site with full traceability. Parsed complete WhatsApp chat export (Jan 30 - today).</div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title conversations">💬 Key Conversations</div>
+        <div class="convo-list">
+          <div class="convo-item" onclick="this.classList.toggle('expanded')">
+            <div class="convo-header">
+              <span class="convo-toggle">▶</span>
+              <div class="convo-main">
+                <div class="convo-time">8:26 AM</div>
+                <div class="convo-text"><strong>Ian:</strong> Asked if overnight deliverables are saved locally, requested GitHub Pages site</div>
+              </div>
+            </div>
+            <div class="convo-detail">
+              <div class="convo-raw">"are all of these files saved locally on my machine? file:///C:/Users/Ian Pilon/.openclaw/workspace/diagrams/ren-architecture.html …. can you push all the new files to a github page so I don't need to go looking around for them on my computer?"</div>
+              <div class="convo-meta">message_id: 3BED43746B4CB4DF3396 • WhatsApp</div>
+            </div>
+          </div>
+          <div class="convo-item" onclick="this.classList.toggle('expanded')">
+            <div class="convo-header">
+              <span class="convo-toggle">▶</span>
+              <div class="convo-main">
+                <div class="convo-time">9:08 AM</div>
+                <div class="convo-text"><strong>Ian:</strong> Vision expansion — transform to full "Interaction History" logging everything we do together</div>
+              </div>
+            </div>
+            <div class="convo-detail">
+              <div class="convo-raw">"I want it to be our 'Interaction History' so the timeline becomes a log of everything we say and do together, that way I can click on any data and see what we discussed together, what homework was ran when I was sleeping and what deliverables you got done"</div>
+              <div class="convo-meta">message_id: 3B16F78F50512738D0A5 • WhatsApp</div>
+            </div>
+          </div>
+          <div class="convo-item" onclick="this.classList.toggle('expanded')">
+            <div class="convo-header">
+              <span class="convo-toggle">▶</span>
+              <div class="convo-main">
+                <div class="convo-time">12:08 PM</div>
+                <div class="convo-text"><strong>Ian:</strong> Shared complete WhatsApp chat export — full history from Jan 30</div>
+              </div>
+            </div>
+            <div class="convo-detail">
+              <div class="convo-raw">Ian shared the complete WhatsApp export file containing all messages from January 30, 2026 to present. 500+ messages covering the entire journey from "Who am I?" to today.</div>
+              <div class="convo-meta">message_id: 3BFC0CD7BE59B6681D85 • WhatsApp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title homework">🌙 Overnight Homework</div>
+        <div class="cards">
+          <div class="card" onclick="this.classList.toggle('expanded')">
+            <div class="card-main">
+              <span class="card-toggle">▶</span>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Ren System Architecture <span class="badge badge-html">HTML</span></div>
+                  <div class="card-timestamp">3:15 AM</div>
+                </div>
+                <div class="card-desc">Full visual design — channels, gateway, memory system, tools, automation, OpenOrca relationship.</div>
+              </div>
+            </div>
+            <div class="card-context">
+              <div class="card-context-label">📍 Why this was requested</div>
+              <div class="card-context-raw">"Homework: https://github.com/nicobailon/visual-explainer
+
+I need you to build an HTML visual design of your architecture tonight when I sleep"</div>
+              <div class="card-context-meta">Ian • Mar 8 @ 4:38 PM</div>
+              <a href="ren-architecture.html" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+            </div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('expanded')">
+            <div class="card-main">
+              <span class="card-toggle">▶</span>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">DeerFlow Deep Dive <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">2:30 AM</div>
+                </div>
+                <div class="card-desc">ByteDance's SuperAgent harness — sub-agent orchestration, Docker sandboxes, MCP servers.</div>
+              </div>
+            </div>
+            <div class="card-context">
+              <div class="card-context-label">📍 Why this was requested</div>
+              <div class="card-context-raw">"add to homework tonight: https://github.com/bytedance/deer-flow"</div>
+              <div class="card-context-meta">Ian • Mar 8 @ 11:15 PM</div>
+              <a href="viewer.html?file=research/deerflow-deep-dive.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+            </div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('expanded')">
+            <div class="card-main">
+              <span class="card-toggle">▶</span>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Autoresearch Analysis <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">3:00 AM</div>
+                </div>
+                <div class="card-desc">Karpathy's "programming the program.md" pattern — autonomous overnight experiments.</div>
+              </div>
+            </div>
+            <div class="card-context">
+              <div class="card-context-label">📍 Why this was requested</div>
+              <div class="card-context-raw">"also research this for homework toight: https://github.com/karpathy/autoresearch"</div>
+              <div class="card-context-meta">Ian • Mar 8 @ 11:19 PM</div>
+              <a href="viewer.html?file=research/autoresearch-analysis.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+            </div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('expanded')">
+            <div class="card-main">
+              <span class="card-toggle">▶</span>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">OpenOrca Phase 1 Analysis <span class="badge badge-md">MD</span></div>
+                  <div class="card-timestamp">3:45 AM</div>
+                </div>
+                <div class="card-desc">Architecture mapping, agent registration API design, sub-agent roles defined.</div>
+              </div>
+            </div>
+            <div class="card-context">
+              <div class="card-context-label">📍 Why this was requested</div>
+              <div class="card-context-raw">"start using Karpathy's overnight autonomous research to figure out how to actually get you inside this GUI with 3-5 other sub agents"</div>
+              <div class="card-context-meta">Ian • Mar 8 @ 11:27 PM</div>
+              <a href="viewer.html?file=openorca/implementation-log.md" style="display: inline-block; margin-top: 12px; color: var(--accent); font-size: 0.9rem;">→ View deliverable</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title deliverables">✅ Deliverables Built Today</div>
+        <div class="cards">
+          <div class="card" onclick="this.classList.toggle('expanded')">
+            <div class="card-main">
+              <span class="card-toggle">▶</span>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Ren & Ian — Interaction History Site</div>
+                  <div class="card-timestamp">8:27 AM - 12:15 PM</div>
+                </div>
+                <div class="card-desc">GitHub Pages site with timeline navigation, milestone view, expandable context, full traceability.</div>
+              </div>
+            </div>
+            <div class="card-context">
+              <div class="card-context-label">📍 Evolution</div>
+              <div class="card-context-raw">8:26 AM — "push to github pages"
+9:08 AM — "transform to Interaction History"
+9:23 AM — "add expandable context"
+11:23 AM — "timeline as navigation, content below"
+12:08 PM — Parsed complete chat export (33 milestones)</div>
+              <div class="card-context-meta">Multiple conversations • Built iteratively</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-main">
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-title">Milestones Data (JSON)</div>
+                  <div class="card-timestamp">12:13 PM</div>
+                </div>
+                <div class="card-desc">33 milestones from Jan 30 - Mar 9 structured with categories, descriptions, and lessons learned.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Milestones View (Full Journey) -->
+  <div class="view" id="view-milestones">
     <div class="timeline-scroll">
       <div class="timeline-track" id="timeline-track">
         <div class="timeline-line"></div>
-        <div class="loading">Loading milestones...</div>
+        <!-- Milestones loaded dynamically -->
       </div>
     </div>
     <div class="milestone-detail" id="milestone-detail"></div>
   </div>
   
   <!-- Categories View -->
-  <div class="categories-view" id="view-categories">
-    <div id="categories-content">
-      <div class="loading">Loading categories...</div>
-    </div>
-  </div>
-  
-  <!-- Recent Days View -->
-  <div class="recent-view" id="view-recent">
-    <p style="color: var(--text-dim); text-align: center; padding: 40px;">
-      Coming soon — daily conversation logs with full context
-    </p>
+  <div class="view" id="view-categories">
+    <div id="categories-content"></div>
   </div>
   
   <div class="meta">
     <a href="https://github.com/ianpilon/ren-deliverables">View on GitHub</a> &bull; 
-    <a href="data/milestones.json">Raw Data</a> &bull;
+    <a href="data/milestones.json">Raw Milestones Data</a> &bull;
     Built by Ren 🐋
   </div>
 </div>
 
 <script>
 let milestonesData = null;
-let selectedMilestone = null;
 
 async function loadMilestones() {
   try {
@@ -165,18 +590,9 @@ async function loadMilestones() {
     milestonesData = await response.json();
     renderTimeline();
     renderCategories();
-    updateStats();
   } catch (err) {
     console.error('Failed to load milestones:', err);
-    document.getElementById('timeline-track').innerHTML = '<div class="loading">Failed to load data. <a href="data/milestones.json">View raw JSON</a></div>';
   }
-}
-
-function updateStats() {
-  if (!milestonesData) return;
-  document.getElementById('total-milestones').textContent = milestonesData.stats.totalMilestones;
-  document.getElementById('total-days').textContent = milestonesData.meta.totalDays;
-  document.getElementById('last-updated').textContent = new Date(milestonesData.meta.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
 function renderTimeline() {
@@ -202,7 +618,6 @@ function renderTimeline() {
     track.appendChild(div);
   });
   
-  // Select last milestone by default
   selectMilestone(milestonesData.milestones.length - 1);
 }
 
@@ -239,8 +654,6 @@ function selectMilestone(index) {
     ${lessonHtml}
   `;
   detail.classList.add('active');
-  
-  // Scroll milestone into view
   milestones[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 }
 
@@ -258,9 +671,8 @@ function renderCategories() {
     const cat = milestonesData.categories[catKey];
     const section = document.createElement('div');
     section.className = 'category-section';
-    
     section.innerHTML = `
-      <div class="category-header">
+      <div class="category-header" style="border-bottom-color: ${cat.color}33;">
         <div class="category-dot" style="background: ${cat.color};"></div>
         <div class="category-name">${cat.emoji} ${cat.label}</div>
         <div class="category-count">${items.length} events</div>
@@ -288,13 +700,18 @@ function renderCategories() {
 
 function showView(view) {
   document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('[class$="-view"]').forEach(v => v.classList.remove('active'));
-  
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelector(`[onclick="showView('${view}')"]`).classList.add('active');
   document.getElementById('view-' + view).classList.add('active');
 }
 
-// Load on page ready
+function showDay(day) {
+  document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.recent-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('day-' + day).classList.add('active');
+  document.querySelector('.recent-item[data-day="' + day + '"]').classList.add('active');
+}
+
 document.addEventListener('DOMContentLoaded', loadMilestones);
 </script>
 </body>
