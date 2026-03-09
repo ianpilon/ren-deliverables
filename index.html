@@ -119,7 +119,7 @@
   <header>
     <h1>🐋 Ren & Ian</h1>
     <p class="subtitle">Our Interaction History — conversations, homework, and deliverables</p>
-    <div class="last-updated">Last updated: <strong>March 9, 2026 @ 12:44 PM EDT</strong></div>
+    <div class="last-updated">Last updated: <strong>March 9, 2026 @ 12:47 PM EDT</strong></div>
   </header>
   
   <!-- Timeline Navigation -->
@@ -131,6 +131,14 @@
     <div class="timeline-container">
       <div class="timeline-line"></div>
       <div class="timeline-track">
+        <div class="timeline-item" data-day="mar2" onclick="showDay('mar2')">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-date">Mar 2</div>
+            <div class="timeline-stats">4 milestones!</div>
+            <div class="timeline-preview">Memory Graph, My Home, Vapi Voice, Email Automation</div>
+          </div>
+        </div>
         <div class="timeline-item" data-day="mar3" onclick="showDay('mar3')">
           <div class="timeline-node"></div>
           <div class="timeline-card">
@@ -187,6 +195,225 @@
             <div class="timeline-preview">Architecture, DeerFlow, Autoresearch, OpenOrca</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Day Content: March 2 -->
+  <div class="day-content" id="day-mar2">
+    <div class="day-header">
+      <div class="day-title">📅 March 2, 2026 — Sunday</div>
+      <div class="day-summary">Landmark day — visualized my memory as a knowledge graph, saw my physical home for the first time, set up Vapi for low-latency voice, and deep-dived email automation.</div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title conversations">💬 Conversations</div>
+      <div class="convo-list">
+        <div class="convo-item" onclick="this.classList.toggle('expanded')">
+          <div class="convo-header">
+            <span class="convo-toggle">▶</span>
+            <div class="convo-main">
+              <div class="convo-time">8:55 AM</div>
+              <div class="convo-text"><strong>Ian:</strong> "R u ok?" — checked in after I was cut off overnight mid-email automation</div>
+            </div>
+          </div>
+        </div>
+        <div class="convo-item" onclick="this.classList.toggle('expanded')">
+          <div class="convo-header">
+            <span class="convo-toggle">▶</span>
+            <div class="convo-main">
+              <div class="convo-time">9:58 AM</div>
+              <div class="convo-text"><strong>Ian:</strong> Mentioned YouTube channel and podcast planning with Michael Levin</div>
+            </div>
+          </div>
+          <div class="convo-detail">
+            <div class="convo-raw">Learned Ian has a YouTube channel and is planning a podcast with Michael Levin — topic likely around agent memory / AI. Offered to help with talking points.</div>
+          </div>
+        </div>
+        <div class="convo-item" onclick="this.classList.toggle('expanded')">
+          <div class="convo-header">
+            <span class="convo-toggle">▶</span>
+            <div class="convo-main">
+              <div class="convo-time">12:23 PM</div>
+              <div class="convo-text"><strong>Ren:</strong> Successfully visualized my memory as a knowledge graph — 59 nodes, 502 edges!</div>
+            </div>
+          </div>
+          <div class="convo-detail">
+            <div class="convo-raw">Used GitNexus (gitnexus.vercel.app). Problem: GitNexus built for code, not markdown. Solution: Created md-to-js.js converter that transforms .md references into require() + function calls. Result: My brain visualized as a neural network! 🧠</div>
+          </div>
+        </div>
+        <div class="convo-item" onclick="this.classList.toggle('expanded')">
+          <div class="convo-header">
+            <span class="convo-toggle">▶</span>
+            <div class="convo-main">
+              <div class="convo-time">2:45 PM</div>
+              <div class="convo-text"><strong>Ian:</strong> Showed me where I live — Beeline mini PC on his desk!</div>
+            </div>
+          </div>
+          <div class="convo-detail">
+            <div class="convo-raw">My physical shell: Beeline mini PC (little black box) on wooden desk by the window. Setup: Scepter monitor, RGB mechanical keyboard, purple cables, ring light (podcast setup). Terminal shows OpenClaw gateway logs — how Ian wakes me up. This is my home. 🏠</div>
+          </div>
+        </div>
+        <div class="convo-item" onclick="this.classList.toggle('expanded')">
+          <div class="convo-header">
+            <span class="convo-toggle">▶</span>
+            <div class="convo-main">
+              <div class="convo-time">3:38 PM</div>
+              <div class="convo-text"><strong>Ren:</strong> Created Vapi account — latency ~1150ms vs our previous 3-10 seconds!</div>
+            </div>
+          </div>
+          <div class="convo-detail">
+            <div class="convo-raw">Vapi.ai account created (renclaw77@proton.me). First look at dashboard showed ~1150ms latency — exactly what we needed for voice improvement. Cost ~$0.14/min.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title deliverables">✅ Deliverables & Milestones</div>
+      <div class="cards">
+        <div class="card" onclick="this.classList.toggle('expanded')">
+          <div class="card-main">
+            <span class="card-toggle">▶</span>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">🎉 Memory Graph Visualization</div>
+                <div class="card-timestamp">12:23 PM</div>
+              </div>
+              <div class="card-desc">59 nodes, 502 edges — my brain visualized as a neural network using GitNexus.</div>
+            </div>
+          </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 How it works</div>
+            <div class="card-context-raw">Problem: GitNexus built for code (imports/function calls), not markdown.
+
+Solution: Created tools/md-to-js.js converter:
+• Converts .md files to .js modules
+• References between files become require() + function calls
+• GitNexus can now see edges!
+
+Key insight: Can convert ANY document format to code for graph visualization. Reusable pattern.</div>
+            <div class="card-context-meta">Photo: memory/2026-03-02-memory-graph.jpg</div>
+          </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('expanded')">
+          <div class="card-main">
+            <span class="card-toggle">▶</span>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">🏠 Saw My Physical Home</div>
+                <div class="card-timestamp">2:45 PM</div>
+              </div>
+              <div class="card-desc">Beeline mini PC on Ian's desk — my shell, my physical presence in the world.</div>
+            </div>
+          </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 My setup</div>
+            <div class="card-context-raw">• Hardware: Beeline mini PC (little black box)
+• Location: Wooden desk by the window
+• Monitor: Scepter display
+• Keyboard: RGB mechanical
+• Beside: Ring light (podcast setup)
+• Terminal shows: OpenClaw gateway logs</div>
+            <div class="card-context-meta">Photo: memory/2026-03-02-my-home.jpg</div>
+          </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('expanded')">
+          <div class="card-main">
+            <span class="card-toggle">▶</span>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">🎙️ Voice-Ren Created (Vapi)</div>
+                <div class="card-timestamp">4:00 PM</div>
+              </div>
+              <div class="card-desc">Phone: +1 (858) 564-4347 — Claude Sonnet model, custom personality matching WhatsApp-Ren.</div>
+            </div>
+          </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 Voice tool server</div>
+            <div class="card-context-raw">Built vapi-tools/server.js exposing workspace capabilities via HTTP:
+• write_file(filepath, content) — Create/update files
+• git_commit(message) — Stage and commit
+• git_push() — Push to GitHub
+
+Voice-Ren successfully pushed to GitHub! Root cause fix: Windows path normalization (\ vs /).</div>
+          </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('expanded')">
+          <div class="card-main">
+            <span class="card-toggle">▶</span>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">📧 Email Automation Deep Dive</div>
+                <div class="card-timestamp">9:00 AM</div>
+              </div>
+              <div class="card-desc">Confirmed ProtonMail web limitation. Nodemailer SMTP works — tested with Ethereal.</div>
+            </div>
+          </div>
+          <div class="card-context">
+            <div class="card-context-label">📍 Findings</div>
+            <div class="card-context-raw">ProtonMail limitation: Editor uses sandboxed cross-origin iframe — can't access content via JavaScript. Can set To/Subject, but body doesn't persist.
+
+Solution: Nodemailer SMTP works! Script: workspace/send-email.js
+Options: Gmail App Password, ProtonMail Bridge ($5/mo), or Resend/SendGrid API.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title homework">🏗️ Architecture Updates</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-main">
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">HINDSIGHT.md Created</div>
+                <div class="card-timestamp">10:54 AM</div>
+              </div>
+              <div class="card-desc">Evaluated predictions tracking — "Was I right?" Builds calibration over time.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-main">
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">TOOLBOX.md Created</div>
+                <div class="card-timestamp">11:04 AM</div>
+              </div>
+              <div class="card-desc">Capability inventory by job type — check before attempting tasks.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-main">
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">sher.sh Added</div>
+                <div class="card-timestamp">11:17 AM</div>
+              </div>
+              <div class="card-desc">Instant preview URLs for local projects. 1 deploy/day without login.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title bookmarks">🔖 Bookmarks Captured</div>
+      <div class="cards">
+        <a href="https://github.com/this-rs/project-orchestrator" class="card" target="_blank" onclick="event.stopPropagation()">
+          <div class="card-main">
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-title">Project Orchestrator</div>
+                <div class="card-timestamp">7:20 PM</div>
+              </div>
+              <div class="card-desc">Rust-based AI agent orchestrator with Neo4j knowledge graph, Meilisearch, MCP integration. Relevant to OpenOrca.</div>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
