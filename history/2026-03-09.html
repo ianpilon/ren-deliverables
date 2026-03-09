@@ -39,10 +39,19 @@
   .section-title::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
   
   .convo-list { display: flex; flex-direction: column; gap: 12px; }
-  .convo-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; }
+  .convo-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .convo-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+  .convo-header:hover { background: var(--surface-hover); }
+  .convo-toggle { color: var(--text-dim); font-size: 0.8rem; transition: transform 0.2s; flex-shrink: 0; margin-top: 2px; }
+  .convo-item.expanded .convo-toggle { transform: rotate(90deg); }
+  .convo-main { flex: 1; }
   .convo-time { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--purple); margin-bottom: 6px; }
   .convo-text { font-size: 0.95rem; color: var(--text); line-height: 1.5; }
   .convo-text strong { color: var(--accent); }
+  .convo-detail { display: none; padding: 0 20px 16px 44px; border-top: 1px solid var(--border); }
+  .convo-item.expanded .convo-detail { display: block; }
+  .convo-raw { background: var(--bg); border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; font-family: inherit; }
+  .convo-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
   
   .cards { display: grid; gap: 16px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
@@ -73,25 +82,70 @@
   <div class="section">
     <div class="section-title conversations">💬 Conversations</div>
     <div class="convo-list">
-      <div class="convo-item">
-        <div class="convo-time">8:26 AM</div>
-        <div class="convo-text"><strong>Ian:</strong> Asked if overnight deliverables are saved locally, requested GitHub Pages site to view them</div>
+      <div class="convo-item" onclick="this.classList.toggle('expanded')">
+        <div class="convo-header">
+          <span class="convo-toggle">▶</span>
+          <div class="convo-main">
+            <div class="convo-time">8:26 AM</div>
+            <div class="convo-text"><strong>Ian:</strong> Asked if overnight deliverables are saved locally, requested GitHub Pages site to view them</div>
+          </div>
+        </div>
+        <div class="convo-detail">
+          <div class="convo-raw">"are all of these files saved locally on my machine? file:///C:/Users/Ian Pilon/.openclaw/workspace/diagrams/ren-architecture.html …. can you push all the new files to a github page so I don't need to go looking around for them on my computer? when your done just give the the github url? is that even possible?"</div>
+          <div class="convo-meta">message_id: 3BED43746B4CB4DF3396 • WhatsApp • +15192770970</div>
+        </div>
       </div>
-      <div class="convo-item">
-        <div class="convo-time">8:37 AM</div>
-        <div class="convo-text"><strong>Ian:</strong> Requested timestamps on deliverables to track what was done when</div>
+      <div class="convo-item" onclick="this.classList.toggle('expanded')">
+        <div class="convo-header">
+          <span class="convo-toggle">▶</span>
+          <div class="convo-main">
+            <div class="convo-time">8:37 AM</div>
+            <div class="convo-text"><strong>Ian:</strong> Requested timestamps on deliverables to track what was done when</div>
+          </div>
+        </div>
+        <div class="convo-detail">
+          <div class="convo-raw">"amazing, can you create a date and time stamp for the Ren Deliverables? so that if I get new deliverables each morning I can start being able to see and track what was done and when?"</div>
+          <div class="convo-meta">message_id: 3BF3983A7D50057DFEA9 • WhatsApp • +15192770970</div>
+        </div>
       </div>
-      <div class="convo-item">
-        <div class="convo-time">8:51 AM</div>
-        <div class="convo-text"><strong>Ian:</strong> Wanted to click into historical dates to see that day's work</div>
+      <div class="convo-item" onclick="this.classList.toggle('expanded')">
+        <div class="convo-header">
+          <span class="convo-toggle">▶</span>
+          <div class="convo-main">
+            <div class="convo-time">8:51 AM</div>
+            <div class="convo-text"><strong>Ian:</strong> Wanted to click into historical dates to see that day's work</div>
+          </div>
+        </div>
+        <div class="convo-detail">
+          <div class="convo-raw">"awesome, now what if I want to see the work done from a previous date? like this one on March 8 for example, currently I can't click into it to the the work, can you make it so that we can?"</div>
+          <div class="convo-meta">message_id: 3B2A3F1B8E03925A7BC8 • WhatsApp • +15192770970</div>
+        </div>
       </div>
-      <div class="convo-item">
-        <div class="convo-time">8:59 AM</div>
-        <div class="convo-text"><strong>Ian:</strong> Requested horizontal scrollable timeline with dates flowing left-to-right</div>
+      <div class="convo-item" onclick="this.classList.toggle('expanded')">
+        <div class="convo-header">
+          <span class="convo-toggle">▶</span>
+          <div class="convo-main">
+            <div class="convo-time">8:59 AM</div>
+            <div class="convo-text"><strong>Ian:</strong> Requested horizontal scrollable timeline with dates flowing left-to-right</div>
+          </div>
+        </div>
+        <div class="convo-detail">
+          <div class="convo-raw">"now I'd like this to actullay look more than a timeline, time moves from right to left, I should be able to scroll my timeline horizonatlly at a meta view and then when I click into a specific date then the page can be vertical view, do you know what I mean? can you make that change for us?"</div>
+          <div class="convo-meta">message_id: 3B1BBB31BCFB9F6B8FA6 • WhatsApp • +15192770970</div>
+        </div>
       </div>
-      <div class="convo-item">
-        <div class="convo-time">9:08 AM</div>
-        <div class="convo-text"><strong>Ian:</strong> Vision expansion — transform from "deliverables" to full "Interaction History" logging everything we do together</div>
+      <div class="convo-item" onclick="this.classList.toggle('expanded')">
+        <div class="convo-header">
+          <span class="convo-toggle">▶</span>
+          <div class="convo-main">
+            <div class="convo-time">9:08 AM</div>
+            <div class="convo-text"><strong>Ian:</strong> Vision expansion — transform from "deliverables" to full "Interaction History"</div>
+          </div>
+        </div>
+        <div class="convo-detail">
+          <div class="convo-raw">"now I want this system to be more than our 'Ren Deliverables Research, diagrams, and implementation work for OpenOrca' I want it to be our 'Interaction History' so the timeline becomes a log of everything we say and do together, that way I can click on any data and see what we discussed together, what homework was ran when I was sleeping and what deliverables you got done, is that possible?"</div>
+          <div class="convo-meta">message_id: 3B16F78F50512738D0A5 • WhatsApp • +15192770970</div>
+        </div>
       </div>
     </div>
   </div>
