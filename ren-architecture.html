@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ren Architecture — Blueprint</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       BLUEPRINT THEME — CSS Custom Properties
+       ============================================ */
+    :root {
+      /* Light mode (blueprint on white) */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --accent: #1e40af;
+      --accent-light: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --grid-color: rgba(30, 64, 175, 0.06);
+      --success: #059669;
+      --warning: #d97706;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-hover: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark mode (blueprint on dark slate) */
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #334155;
+      --border-light: #475569;
+      --accent: #60a5fa;
+      --accent-light: #93c5fd;
+      --accent-glow: rgba(96, 165, 250, 0.2);
+      --grid-color: rgba(96, 165, 250, 0.08);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-hover: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    /* ============================================
+       BASE STYLES
+       ============================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      /* Blueprint grid background */
+      background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       SIDEBAR NAV
+       ============================================ */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+      }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .logo-emoji {
+      font-size: 2rem;
+    }
+
+    .logo-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .nav-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      margin: 0.25rem 0;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    .nav-link.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .theme-toggle {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 1rem;
+      }
+    }
+
+    /* ============================================
+       MAIN CONTENT
+       ============================================ */
+    .main {
+      padding: 3rem;
+      max-width: 1200px;
+    }
+
+    @media (max-width: 900px) {
+      .main {
+        padding: 1.5rem;
+      }
+    }
+
+    .header {
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+    }
+
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    /* ============================================
+       MERMAID DIAGRAM
+       ============================================ */
+    .diagram-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    .diagram-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .diagram-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .diagram-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================
+       GRID CARDS
+       ============================================ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .ve-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .ve-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+
+    /* Staggered fade-in animations */
+    .ve-card:nth-child(1) { animation: fadeInUp 0.5s ease 0.1s both; }
+    .ve-card:nth-child(2) { animation: fadeInUp 0.5s ease 0.15s both; }
+    .ve-card:nth-child(3) { animation: fadeInUp 0.5s ease 0.2s both; }
+    .ve-card:nth-child(4) { animation: fadeInUp 0.5s ease 0.25s both; }
+    .ve-card:nth-child(5) { animation: fadeInUp 0.5s ease 0.3s both; }
+    .ve-card:nth-child(6) { animation: fadeInUp 0.5s ease 0.35s both; }
+    .ve-card:nth-child(7) { animation: fadeInUp 0.5s ease 0.4s both; }
+    .ve-card:nth-child(8) { animation: fadeInUp 0.5s ease 0.45s both; }
+
+    .ve-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .ve-card-icon {
+      font-size: 1.5rem;
+    }
+
+    .ve-card-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .ve-card-content {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .ve-card-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+
+    .ve-card-list li {
+      padding: 0.375rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .ve-card-list li::before {
+      content: "›";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      margin-right: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tag.success {
+      background: rgba(5, 150, 105, 0.15);
+      color: var(--success);
+    }
+
+    .tag.warning {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--warning);
+    }
+
+    /* ============================================
+       STATUS INDICATORS
+       ============================================ */
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s ease infinite;
+    }
+
+    .status-dot.inactive {
+      background: var(--text-muted);
+      animation: none;
+    }
+
+    /* ============================================
+       KEYFRAMES
+       ============================================ */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-emoji">🐋</span>
+        <span class="logo-text">REN</span>
+      </div>
+      
+      <nav>
+        <div class="nav-section">
+          <div class="nav-label">Overview</div>
+          <a href="#topology" class="nav-link active">System Topology</a>
+          <a href="#channels" class="nav-link">Input Channels</a>
+        </div>
+        
+        <div class="nav-section">
+          <div class="nav-label">Core Systems</div>
+          <a href="#gateway" class="nav-link">Gateway Layer</a>
+          <a href="#memory" class="nav-link">Memory System</a>
+          <a href="#tools" class="nav-link">Tool Access</a>
+          <a href="#automation" class="nav-link">Automation</a>
+        </div>
+        
+        <div class="nav-section">
+          <div class="nav-label">Workspace</div>
+          <a href="#workspace" class="nav-link">Files & Config</a>
+          <a href="#openorca" class="nav-link">OpenOrca Vision</a>
+        </div>
+      </nav>
+      
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark Mode</span>
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main">
+      <header class="header">
+        <h1>Ren Architecture</h1>
+        <p>AI Agent Orchestrator — System Blueprint v1.0</p>
+      </header>
+      
+      <!-- System Topology Diagram -->
+      <section id="topology" class="section">
+        <h2 class="section-title">// System Topology</h2>
+        
+        <div class="diagram-container">
+          <div class="diagram-controls">
+            <button class="diagram-btn" onclick="zoomIn()">+ Zoom In</button>
+            <button class="diagram-btn" onclick="zoomOut()">- Zoom Out</button>
+            <button class="diagram-btn" onclick="resetZoom()">⟲ Reset</button>
+          </div>
+          <div class="mermaid" id="main-diagram">
+flowchart TB
+    subgraph Channels["📡 INPUT CHANNELS"]
+        WA["📱 WhatsApp<br/>+1 519 277 0970"]
+        Voice["🎤 Voice/Vapi<br/>+1 858 564 4347"]
+        Web["🌐 Web Chat"]
+        Cron["⏰ Cron Jobs"]
+    end
+    
+    subgraph Gateway["⚡ OPENCLAW GATEWAY"]
+        Router["Session Router"]
+        Plugins["Plugin System"]
+        Sessions["Session Manager"]
+    end
+    
+    subgraph Core["🧠 REN CORE"]
+        Agent["Claude Opus 4.5"]
+        Context["Context Engine"]
+        Tools["Tool Dispatcher"]
+    end
+    
+    subgraph Memory["💾 MEMORY SYSTEM"]
+        Compressed["MEMORY.md<br/>(Observations)"]
+        Daily["Daily Files<br/>(Raw Buffer)"]
+        Search["Semantic Search"]
+    end
+    
+    subgraph Workspace["📁 WORKSPACE"]
+        Soul["SOUL.md"]
+        Identity["IDENTITY.md"]
+        Elves["ELVES.md"]
+        Projects["Projects/"]
+    end
+    
+    subgraph OpenOrca["🔱 OPENORCA"]
+        Orchestration["Multi-Agent<br/>Orchestration"]
+        Fleet["Agent Fleet"]
+        TrustGraph["TrustGraph"]
+    end
+    
+    Channels --> Gateway
+    Gateway --> Core
+    Core <--> Memory
+    Core <--> Workspace
+    Core --> OpenOrca
+    
+    classDef channel fill:#1e40af,stroke:#3b82f6,color:#fff
+    classDef gateway fill:#059669,stroke:#34d399,color:#fff
+    classDef core fill:#7c3aed,stroke:#a78bfa,color:#fff
+    classDef memory fill:#d97706,stroke:#fbbf24,color:#fff
+    classDef workspace fill:#64748b,stroke:#94a3b8,color:#fff
+    classDef orca fill:#be123c,stroke:#fb7185,color:#fff
+    
+    class WA,Voice,Web,Cron channel
+    class Router,Plugins,Sessions gateway
+    class Agent,Context,Tools core
+    class Compressed,Daily,Search memory
+    class Soul,Identity,Elves,Projects workspace
+    class Orchestration,Fleet,TrustGraph orca
+          </div>
+        </div>
+      </section>
+      
+      <!-- Input Channels -->
+      <section id="channels" class="section">
+        <h2 class="section-title">// Input Channels</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📱</span>
+              <span class="ve-card-title">WhatsApp</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Primary communication channel with Ian.</p>
+              <ul class="ve-card-list">
+                <li>Number: +1 519 277 0970</li>
+                <li>Plugin: whatsapp-baileys</li>
+                <li>Features: Media, reactions, voice notes</li>
+              </ul>
+              <div class="status-row">
+                <div class="status-item">
+                  <span class="status-dot"></span>
+                  Active
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🎤</span>
+              <span class="ve-card-title">Voice / Vapi</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Real-time voice conversations via Twilio + Vapi.</p>
+              <ul class="ve-card-list">
+                <li>Number: +1 858 564 4347</li>
+                <li>TTS: ElevenLabs</li>
+                <li>STT: Deepgram</li>
+              </ul>
+              <div class="status-row">
+                <div class="status-item">
+                  <span class="status-dot"></span>
+                  Active
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🌐</span>
+              <span class="ve-card-title">Web Chat</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Browser-based interface via OpenClaw gateway.</p>
+              <ul class="ve-card-list">
+                <li>URL: localhost:3000</li>
+                <li>Sessions: Persistent</li>
+                <li>Features: Code blocks, file upload</li>
+              </ul>
+              <div class="status-row">
+                <div class="status-item">
+                  <span class="status-dot"></span>
+                  Active
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">⏰</span>
+              <span class="ve-card-title">Cron / Scheduled</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Autonomous scheduled tasks and heartbeats.</p>
+              <ul class="ve-card-list">
+                <li>Heartbeat: Every 30 min</li>
+                <li>Overnight Elves: 3 AM</li>
+                <li>Memory decay: Weekly</li>
+              </ul>
+              <div class="status-row">
+                <div class="status-item">
+                  <span class="status-dot"></span>
+                  Active
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Gateway Layer -->
+      <section id="gateway" class="section">
+        <h2 class="section-title">// Gateway Layer</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">⚡</span>
+              <span class="ve-card-title">OpenClaw Gateway</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Core orchestration layer managing all channels and sessions.</p>
+              <div style="margin-top: 0.75rem;">
+                <span class="tag">Node.js</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Plugin System</span>
+              </div>
+              <ul class="ve-card-list">
+                <li>Session routing and state management</li>
+                <li>Multi-channel message normalization</li>
+                <li>Tool policy enforcement</li>
+                <li>Cron job scheduling</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🔌</span>
+              <span class="ve-card-title">Plugin System</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Extensible plugin architecture for channels and capabilities.</p>
+              <div style="margin-top: 0.75rem;">
+                <span class="tag success">whatsapp</span>
+                <span class="tag success">voice-call</span>
+                <span class="tag success">browser</span>
+                <span class="tag">telegram</span>
+                <span class="tag">discord</span>
+              </div>
+              <ul class="ve-card-list">
+                <li>Hot-reload plugin updates</li>
+                <li>Channel-specific capabilities</li>
+                <li>Unified tool interface</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Memory System -->
+      <section id="memory" class="section">
+        <h2 class="section-title">// Memory System</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📊</span>
+              <span class="ve-card-title">MEMORY.md (Observations)</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Compressed, prioritized insights — the distilled essence of experience.</p>
+              <div style="margin-top: 0.75rem;">
+                <span class="tag" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🔴 Important</span>
+                <span class="tag" style="background: rgba(234, 179, 8, 0.15); color: #eab308;">🟡 Maybe</span>
+                <span class="tag" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">🟢 Info</span>
+              </div>
+              <ul class="ve-card-list">
+                <li>User preferences and boundaries</li>
+                <li>Learned behaviors (articles, research)</li>
+                <li>Project milestones and decisions</li>
+                <li>Tool configurations and quirks</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📝</span>
+              <span class="ve-card-title">Daily Files (Raw Buffer)</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Timestamped logs before compression into observations.</p>
+              <ul class="ve-card-list">
+                <li>Path: <code>memory/YYYY-MM-DD.md</code></li>
+                <li>Hot window: &lt;7 days (full detail)</li>
+                <li>Warm: 7-30 days (extract + archive)</li>
+                <li>Cold: &gt;30 days (delete after extraction)</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🔍</span>
+              <span class="ve-card-title">Semantic Search</span>
+            </div>
+            <div class="ve-card-content">
+              <p>AI-powered recall across all memory files.</p>
+              <ul class="ve-card-list">
+                <li>Tool: <code>memory_search</code></li>
+                <li>Scope: MEMORY.md + memory/*.md</li>
+                <li>Mandatory before answering prior work questions</li>
+                <li>Returns top snippets with path + line numbers</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🔄</span>
+              <span class="ve-card-title">Memory Decay Cycle</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Periodic compression and garbage collection.</p>
+              <ul class="ve-card-list">
+                <li><strong>Observer pass:</strong> Compress daily → observations</li>
+                <li><strong>Reflector pass:</strong> Demote/remove stale items</li>
+                <li>🟢 Info decays first, 🔴 Important persists</li>
+                <li>Archive: <code>memory/archive/YYYY-MM.md</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Tool Access -->
+      <section id="tools" class="section">
+        <h2 class="section-title">// Tool Access</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🌐</span>
+              <span class="ve-card-title">Browser Automation</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Full web automation via managed browser profiles.</p>
+              <div style="margin-top: 0.75rem;">
+                <span class="tag success">openclaw (autonomous)</span>
+                <span class="tag warning">chrome (user auth)</span>
+              </div>
+              <ul class="ve-card-list">
+                <li>Snapshot → act pattern (element refs)</li>
+                <li>Screenshot and PDF generation</li>
+                <li>Form filling, clicking, scraping</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">💻</span>
+              <span class="ve-card-title">Shell Execution</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Run commands in sandbox or on host.</p>
+              <ul class="ve-card-list">
+                <li>Tool: <code>exec</code></li>
+                <li>Background processes supported</li>
+                <li>PTY mode for interactive CLIs</li>
+                <li>Workdir: workspace by default</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🔎</span>
+              <span class="ve-card-title">Web Search & Fetch</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Research capabilities via Brave API and direct fetch.</p>
+              <ul class="ve-card-list">
+                <li><code>web_search</code>: Brave Search API</li>
+                <li><code>web_fetch</code>: HTML → markdown extraction</li>
+                <li>Region and language support</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📤</span>
+              <span class="ve-card-title">Messaging</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Send messages across connected channels.</p>
+              <ul class="ve-card-list">
+                <li>Tool: <code>message</code></li>
+                <li>Actions: send, poll, react</li>
+                <li>Cross-session: <code>sessions_send</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Automation -->
+      <section id="automation" class="section">
+        <h2 class="section-title">// Automation</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">💓</span>
+              <span class="ve-card-title">Heartbeats</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Periodic check-ins driven by HEARTBEAT.md.</p>
+              <ul class="ve-card-list">
+                <li>Default interval: ~30 minutes</li>
+                <li>Check: email, calendar, mentions</li>
+                <li>Background: memory maintenance, git status</li>
+                <li>Quiet time: 23:00-08:00</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">⏰</span>
+              <span class="ve-card-title">Cron Jobs</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Scheduled tasks with precise timing.</p>
+              <div style="margin-top: 0.75rem;">
+                <span class="tag success">overnight-elves</span>
+                <span class="tag">memory-decay</span>
+              </div>
+              <ul class="ve-card-list">
+                <li>Schedule types: at, every, cron expr</li>
+                <li>Isolated sessions for autonomy</li>
+                <li>Critical: <code>bestEffort: true</code> for reliability</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🧵</span>
+              <span class="ve-card-title">Overnight Elves</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Autonomous work while Ian sleeps (ELVES.md).</p>
+              <ul class="ve-card-list">
+                <li>Briefing: Evening (before bed)</li>
+                <li>Execution: 3 AM cron job</li>
+                <li>Report: Morning summary</li>
+                <li>Weekly review: Fridays</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">🔄</span>
+              <span class="ve-card-title">Sub-Agent Spawning</span>
+            </div>
+            <div class="ve-card-content">
+              <p>Delegate complex tasks to isolated sessions.</p>
+              <ul class="ve-card-list">
+                <li>Tool: <code>sessions_spawn</code></li>
+                <li>Auto-announce results when complete</li>
+                <li>Different models per task</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Workspace -->
+      <section id="workspace" class="section">
+        <h2 class="section-title">// Workspace Files</h2>
+        
+        <div class="card-grid">
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">👤</span>
+              <span class="ve-card-title">Identity Files</span>
+            </div>
+            <div class="ve-card-content">
+              <ul class="ve-card-list">
+                <li><strong>SOUL.md</strong> — Who I am, how I behave</li>
+                <li><strong>IDENTITY.md</strong> — Name, creature, vibe, emoji</li>
+                <li><strong>USER.md</strong> — About Ian (my human)</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📋</span>
+              <span class="ve-card-title">Operational Files</span>
+            </div>
+            <div class="ve-card-content">
+              <ul class="ve-card-list">
+                <li><strong>AGENTS.md</strong> — Main instructions, protocols</li>
+                <li><strong>TOOLS.md</strong> — Local tool notes</li>
+                <li><strong>ELVES.md</strong> — Overnight work queue</li>
+                <li><strong>HEARTBEAT.md</strong> — Periodic check config</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="ve-card">
+            <div class="ve-card-header">
+              <span class="ve-card-icon">📁</span>
+              <span class="ve-card-title">Project Directories</span>
+            </div>
+            <div class="ve-card-content">
+              <ul class="ve-card-list">
+                <li><strong>memory/</strong> — Daily logs, archives</li>
+                <li><strong>research/</strong> — Deep dives, analyses</li>
+                <li><strong>diagrams/</strong> — Visual documentation</li>
+                <li><strong>projects/</strong> — Active work</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- OpenOrca Vision -->
+      <section id="openorca" class="section">
+        <h2 class="section-title">// OpenOrca Vision</h2>
+        
+        <div class="ve-card" style="max-width: 800px;">
+          <div class="ve-card-header">
+            <span class="ve-card-icon">🔱</span>
+            <span class="ve-card-title">Multi-Agent Orchestration Platform</span>
+          </div>
+          <div class="ve-card-content">
+            <p style="margin-bottom: 1rem;">
+              OpenOrca is the command center for managing personal AI agent fleets. 
+              Ren serves as the orchestrator — recruiting, coordinating, and deploying 
+              specialized agents for complex tasks.
+            </p>
+            
+            <div style="margin-bottom: 1rem;">
+              <strong>Core Pillars:</strong>
+            </div>
+            
+            <ul class="ve-card-list">
+              <li><strong>Harness Engineering</strong> — Build environments, not just prompts</li>
+              <li><strong>ClawWork Economics</strong> — Self-sustaining agent economies</li>
+              <li><strong>TrustGraph</strong> — Shared knowledge across agents</li>
+              <li><strong>Cascading Protocol</strong> — Contract-based task validation</li>
+              <li><strong>Cynefin Escalation</strong> — Know when to involve humans</li>
+            </ul>
+            
+            <div style="margin-top: 1.5rem;">
+              <span class="tag">GitHub: ianpilon/OpenOrca</span>
+              <span class="tag warning">Status: Active Development</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        Generated by Ren 🐋 • Overnight Elves Worker • March 9, 2026 @ 3:00 AM
+      </footer>
+    </main>
+  </div>
+  
+  <script>
+    // Initialize Mermaid with blueprint theme
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#1e40af',
+        primaryTextColor: '#f1f5f9',
+        primaryBorderColor: '#3b82f6',
+        lineColor: '#64748b',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0f172a',
+        background: '#0f172a',
+        mainBkg: '#1e293b',
+        textColor: '#f1f5f9',
+        fontSize: '14px',
+        fontFamily: 'JetBrains Mono, monospace'
+      },
+      flowchart: {
+        curve: 'basis',
+        padding: 20
+      }
+    });
+    
+    // Theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      
+      document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      document.getElementById('theme-label').textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+      
+      localStorage.setItem('theme', newTheme);
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      document.getElementById('theme-icon').textContent = '☀️';
+      document.getElementById('theme-label').textContent = 'Light Mode';
+    }
+    
+    // Zoom controls
+    let zoomLevel = 1;
+    const diagram = document.getElementById('main-diagram');
+    
+    function zoomIn() {
+      zoomLevel = Math.min(zoomLevel + 0.2, 2);
+      diagram.style.transform = `scale(${zoomLevel})`;
+      diagram.style.transformOrigin = 'center top';
+    }
+    
+    function zoomOut() {
+      zoomLevel = Math.max(zoomLevel - 0.2, 0.5);
+      diagram.style.transform = `scale(${zoomLevel})`;
+      diagram.style.transformOrigin = 'center top';
+    }
+    
+    function resetZoom() {
+      zoomLevel = 1;
+      diagram.style.transform = 'scale(1)';
+    }
+    
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

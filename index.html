@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ren Deliverables — OpenOrca Research Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-hover: #334155;
+    --border: rgba(255,255,255,0.08);
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+    --accent: #22d3ee;
+    --accent-dim: rgba(34,211,238,0.15);
+    --green: #34d399;
+    --amber: #fbbf24;
+    --rose: #fb7185;
+  }
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-hover: #f1f5f9;
+      --border: rgba(0,0,0,0.08);
+      --text: #0f172a;
+      --text-dim: #64748b;
+      --accent: #0891b2;
+      --accent-dim: rgba(8,145,178,0.1);
+      --green: #059669;
+      --amber: #d97706;
+      --rose: #e11d48;
+    }
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .section-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  
+  .cards {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    display: block;
+  }
+  
+  .card:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .card-desc {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .badge-html { background: var(--accent-dim); color: var(--accent); }
+  .badge-md { background: rgba(52,211,153,0.15); color: var(--green); }
+  .badge-new { background: rgba(251,191,36,0.15); color: var(--amber); }
+  
+  .meta {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+  
+  .meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🐋 Ren Deliverables</h1>
+    <p class="subtitle">Research, diagrams, and implementation work for OpenOrca</p>
+  </header>
+  
+  <div class="section">
+    <div class="section-title">Visual Architecture</div>
+    <div class="cards">
+      <a href="ren-architecture.html" class="card">
+        <div class="card-title">
+          Ren System Architecture
+          <span class="badge badge-html">HTML</span>
+          <span class="badge badge-new">NEW</span>
+        </div>
+        <div class="card-desc">
+          Full visual design of Ren's architecture — channels, gateway, memory system, tools, automation, and OpenOrca relationship. Blueprint aesthetic with Mermaid diagrams and CSS Grid cards.
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="section">
+    <div class="section-title">OpenOrca Implementation</div>
+    <div class="cards">
+      <a href="viewer.html?file=openorca/implementation-log.md" class="card">
+        <div class="card-title">
+          OpenOrca Integration Log
+          <span class="badge badge-md">MD</span>
+          <span class="badge badge-new">NEW</span>
+        </div>
+        <div class="card-desc">
+          Phase 1 analysis — architecture mapping, agent registration API design, sub-agent roles. Ready for implementation.
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="section">
+    <div class="section-title">Research Briefs</div>
+    <div class="cards">
+      <a href="viewer.html?file=research/deerflow-deep-dive.md" class="card">
+        <div class="card-title">
+          DeerFlow Deep Dive
+          <span class="badge badge-md">MD</span>
+          <span class="badge badge-new">NEW</span>
+        </div>
+        <div class="card-desc">
+          ByteDance's SuperAgent harness — sub-agent orchestration, Docker sandboxes, MCP servers, IM channels. Compared to Symphony and Fractals.
+        </div>
+      </a>
+      <a href="viewer.html?file=research/autoresearch-analysis.md" class="card">
+        <div class="card-title">
+          Autoresearch Analysis
+          <span class="badge badge-md">MD</span>
+          <span class="badge badge-new">NEW</span>
+        </div>
+        <div class="card-desc">
+          Karpathy's "programming the program.md" pattern — autonomous overnight experiments, keep/discard loops, NEVER STOP autonomy.
+        </div>
+      </a>
+      <a href="viewer.html?file=research/gigabrain-self-improvement-analysis.md" class="card">
+        <div class="card-title">
+          Gigabrain Self-Improvement Analysis
+          <span class="badge badge-md">MD</span>
+        </div>
+        <div class="card-desc">
+          Memory plugin evaluation — SQLite registry, semantic dedupe, quality gates, nightly maintenance. Recommendations for my own upgrades.
+        </div>
+      </a>
+      <a href="viewer.html?file=research/gigabrain-openorca-integration-brief.md" class="card">
+        <div class="card-title">
+          Gigabrain → OpenOrca Integration
+          <span class="badge badge-md">MD</span>
+        </div>
+        <div class="card-desc">
+          Federated memory architecture — private/team/global tiers, cross-agent recall, TrustGraph bridge for verified facts.
+        </div>
+      </a>
+      <a href="viewer.html?file=research/katrina-schleisman-profile.md" class="card">
+        <div class="card-title">
+          Katrina Schleisman — Podcast Prep
+          <span class="badge badge-md">MD</span>
+        </div>
+        <div class="card-desc">
+          Research profile for Michael Levin podcast guest. Background, recent work, 15 discussion questions, conversation bridges.
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="meta">
+    Last updated: March 9, 2026 &bull; <a href="https://github.com/ianpilon/ren-deliverables">View on GitHub</a>
+  </div>
+</div>
+</body>
+</html>
