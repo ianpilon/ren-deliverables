@@ -199,51 +199,142 @@
     text-decoration: none;
   }
   
-  .history {
+  .timeline {
     margin-top: 48px;
   }
   
-  .history-title {
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .timeline-title {
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 16px;
     color: var(--text);
   }
   
-  .history-list {
+  .timeline-hint {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  
+  .timeline-container {
+    position: relative;
+  }
+  
+  .timeline-track {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 20px 0 30px 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .timeline-track::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .timeline-track::-webkit-scrollbar-track {
+    background: var(--surface);
+    border-radius: 4px;
+  }
+  
+  .timeline-track::-webkit-scrollbar-thumb {
+    background: var(--border-bright, rgba(255,255,255,0.15));
+    border-radius: 4px;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  
+  .timeline-item {
+    flex: 0 0 auto;
+    width: 200px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+  }
+  
+  .timeline-node {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+    margin-bottom: 16px;
+    transition: all 0.2s;
+  }
+  
+  .timeline-item:hover .timeline-node {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 3px var(--accent), 0 0 20px var(--accent-dim);
+  }
+  
+  .timeline-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
+    border-radius: 10px;
+    padding: 16px;
+    width: 100%;
+    transition: all 0.2s;
+    text-align: center;
   }
   
-  .history-item {
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: background 0.2s;
+  .timeline-item:hover .timeline-card {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
   
-  .history-item:hover {
-    background: var(--surface-hover);
-  }
-  
-  .history-item:last-child {
-    border-bottom: none;
-  }
-  
-  .history-date {
+  .timeline-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--accent);
-    min-width: 140px;
+    margin-bottom: 8px;
   }
   
-  .history-text {
-    font-size: 0.9rem;
+  .timeline-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  
+  .timeline-label {
+    font-size: 0.75rem;
     color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .timeline-preview {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 10px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>
 </head>
@@ -369,17 +460,42 @@
     </div>
   </div>
   
-  <div class="history">
-    <div class="history-title">📅 Delivery History</div>
-    <div class="history-list">
-      <a href="history/2026-03-09.html" class="history-item" style="text-decoration: none; color: inherit; cursor: pointer;">
-        <div class="history-date">Mar 9, 2026</div>
-        <div class="history-text">Ren Architecture Diagram, DeerFlow Deep Dive, Autoresearch Analysis, OpenOrca Phase 1</div>
-      </a>
-      <a href="history/2026-03-08.html" class="history-item" style="text-decoration: none; color: inherit; cursor: pointer;">
-        <div class="history-date">Mar 8, 2026</div>
-        <div class="history-text">Gigabrain briefs (self-improvement + OpenOrca integration), Katrina Schleisman profile</div>
-      </a>
+  <div class="timeline">
+    <div class="timeline-header">
+      <div class="timeline-title">📅 Delivery Timeline</div>
+      <div class="timeline-hint">← scroll →</div>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-track">
+        <a href="history/2026-03-09.html" class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-date">Mar 9</div>
+            <div class="timeline-count">4</div>
+            <div class="timeline-label">deliverables</div>
+            <div class="timeline-preview">Architecture, DeerFlow, Autoresearch, OpenOrca</div>
+          </div>
+        </a>
+        <a href="history/2026-03-08.html" class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <div class="timeline-date">Mar 8</div>
+            <div class="timeline-count">3</div>
+            <div class="timeline-label">deliverables</div>
+            <div class="timeline-preview">Gigabrain analysis, OpenOrca integration, Podcast prep</div>
+          </div>
+        </a>
+        <a href="history/2026-03-07.html" class="timeline-item" style="opacity: 0.5; pointer-events: none;">
+          <div class="timeline-node" style="background: var(--text-dim); box-shadow: 0 0 0 2px var(--text-dim);"></div>
+          <div class="timeline-card">
+            <div class="timeline-date">Mar 7</div>
+            <div class="timeline-count">—</div>
+            <div class="timeline-label">bookmarks</div>
+            <div class="timeline-preview">Research bookmarks captured</div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
   
