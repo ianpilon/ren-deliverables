@@ -223,6 +223,11 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    transition: background 0.2s;
+  }
+  
+  .history-item:hover {
+    background: var(--surface-hover);
   }
   
   .history-item:last-child {
@@ -367,14 +372,14 @@
   <div class="history">
     <div class="history-title">📅 Delivery History</div>
     <div class="history-list">
-      <div class="history-item">
+      <a href="history/2026-03-09.html" class="history-item" style="text-decoration: none; color: inherit; cursor: pointer;">
         <div class="history-date">Mar 9, 2026</div>
         <div class="history-text">Ren Architecture Diagram, DeerFlow Deep Dive, Autoresearch Analysis, OpenOrca Phase 1</div>
-      </div>
-      <div class="history-item">
+      </a>
+      <a href="history/2026-03-08.html" class="history-item" style="text-decoration: none; color: inherit; cursor: pointer;">
         <div class="history-date">Mar 8, 2026</div>
         <div class="history-text">Gigabrain briefs (self-improvement + OpenOrca integration), Katrina Schleisman profile</div>
-      </div>
+      </a>
     </div>
   </div>
   
