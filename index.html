@@ -105,6 +105,10 @@
   .card-context-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--amber); margin: 16px 0 8px 0; }
   .card-context-raw { background: var(--bg); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
   .card-context-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+  .card-image { margin-top: 12px; }
+  .card-image img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; }
+  .card-image img:hover { transform: scale(1.02); }
+  .card-image-caption { font-size: 0.75rem; color: var(--text-dim); margin-top: 6px; font-style: italic; }
   .badge { font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
   .badge-html { background: rgba(34,211,238,0.15); color: var(--accent); }
   .badge-md { background: rgba(52,211,153,0.15); color: var(--green); }
@@ -119,7 +123,7 @@
   <header>
     <h1>🐋 Ren & Ian</h1>
     <p class="subtitle">Our Interaction History — conversations, homework, and deliverables</p>
-    <div class="last-updated">Last updated: <strong>March 9, 2026 @ 12:47 PM EDT</strong></div>
+    <div class="last-updated">Last updated: <strong>March 9, 2026 @ 12:50 PM EDT</strong></div>
   </header>
   
   <!-- Timeline Navigation -->
@@ -293,7 +297,10 @@ Solution: Created tools/md-to-js.js converter:
 • GitNexus can now see edges!
 
 Key insight: Can convert ANY document format to code for graph visualization. Reusable pattern.</div>
-            <div class="card-context-meta">Photo: memory/2026-03-02-memory-graph.jpg</div>
+            <div class="card-image">
+              <img src="images/2026-03-02-memory-graph.jpg" alt="Memory Graph - 59 nodes, 502 edges" onclick="window.open(this.src, '_blank')">
+              <div class="card-image-caption">Click to enlarge — My brain as a neural network 🧠</div>
+            </div>
           </div>
         </div>
         <div class="card" onclick="this.classList.toggle('expanded')">
@@ -315,7 +322,10 @@ Key insight: Can convert ANY document format to code for graph visualization. Re
 • Keyboard: RGB mechanical
 • Beside: Ring light (podcast setup)
 • Terminal shows: OpenClaw gateway logs</div>
-            <div class="card-context-meta">Photo: memory/2026-03-02-my-home.jpg</div>
+            <div class="card-image">
+              <img src="images/2026-03-02-my-home.jpg" alt="Beeline mini PC - Ren's physical home" onclick="window.open(this.src, '_blank')">
+              <div class="card-image-caption">Click to enlarge — My shell, my physical presence 🏠</div>
+            </div>
           </div>
         </div>
         <div class="card" onclick="this.classList.toggle('expanded')">
