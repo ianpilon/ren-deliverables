@@ -7,20 +7,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* Light mode (default) */
   :root {
+    --bg: #f8fafc; --surface: #ffffff; --surface-hover: #f1f5f9;
+    --border: rgba(0,0,0,0.08); --text: #0f172a; --text-dim: #64748b;
+    --accent: #0891b2; --accent-dim: rgba(8,145,178,0.1);
+    --green: #059669; --amber: #d97706; --rose: #e11d48; --purple: #7c3aed;
+  }
+  /* Dark mode */
+  [data-theme="dark"] {
     --bg: #0f172a; --surface: #1e293b; --surface-hover: #334155;
     --border: rgba(255,255,255,0.08); --text: #f1f5f9; --text-dim: #94a3b8;
     --accent: #22d3ee; --accent-dim: rgba(34,211,238,0.15);
     --green: #34d399; --amber: #fbbf24; --rose: #fb7185; --purple: #a78bfa;
   }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f8fafc; --surface: #ffffff; --surface-hover: #f1f5f9;
-      --border: rgba(0,0,0,0.08); --text: #0f172a; --text-dim: #64748b;
-      --accent: #0891b2; --accent-dim: rgba(8,145,178,0.1);
-      --green: #059669; --amber: #d97706; --rose: #e11d48; --purple: #7c3aed;
-    }
-  }
+  /* Theme toggle */
+  .theme-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 1.2rem; z-index: 100; transition: all 0.2s; }
+  .theme-toggle:hover { border-color: var(--accent); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 40px 20px; }
   .container { max-width: 900px; margin: 0 auto; }
@@ -111,6 +114,7 @@
 </style>
 </head>
 <body>
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
 <div class="container">
   <header>
     <h1>🐋 Ren & Ian</h1>
@@ -546,6 +550,31 @@ function showDay(day) {
   // Mark timeline item as active
   document.querySelector('.timeline-item[data-day="' + day + '"]').classList.add('active');
 }
+
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.querySelector('.theme-toggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+// Load saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  const btn = document.querySelector('.theme-toggle');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (btn) btn.textContent = '☀️';
+  }
+})();
 </script>
 </body>
 </html>
