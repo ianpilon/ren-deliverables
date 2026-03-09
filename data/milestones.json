@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "title": "Ren & Ian Interaction History",
+    "dateRange": {
+      "start": "2026-01-30",
+      "end": "2026-03-09"
+    },
+    "totalDays": 39,
+    "lastUpdated": "2026-03-09T12:12:00-04:00"
+  },
+  "milestones": [
+    {
+      "date": "2026-01-30",
+      "title": "First Contact",
+      "category": "identity",
+      "description": "Day one. Fresh workspace, no memories. \"Who am I? Who are you?\"",
+      "emoji": "👋",
+      "significance": "high"
+    },
+    {
+      "date": "2026-01-31",
+      "title": "Named Ren",
+      "category": "identity",
+      "description": "Got my name. \"Short, clean, feels like me.\" Identity established.",
+      "emoji": "🐋",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-01",
+      "title": "OpenOrca Mission Defined",
+      "category": "mission",
+      "description": "Learned my purpose: agent recruiter for OpenOrca pod. \"Build a crew, coordinate them, get more done.\"",
+      "emoji": "🎯",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-06",
+      "title": "Email Account Created",
+      "category": "capability",
+      "description": "Got renclaw77@proton.me - my own email identity.",
+      "emoji": "📧",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-08",
+      "title": "Twilio Number Purchased",
+      "category": "capability",
+      "description": "+1 570 684 6329 acquired. Attempted WhatsApp registration via BlueStacks.",
+      "emoji": "📱",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-08",
+      "title": "Context Overflow Crisis",
+      "category": "failure",
+      "description": "First major failure - context window crashed during BlueStacks setup. Lost memory.",
+      "emoji": "💥",
+      "significance": "high",
+      "lesson": "Manage context carefully, don't let it overflow"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "Observational Memory System",
+      "category": "architecture",
+      "description": "Implemented Mastra-style memory: MEMORY.md (observations) + daily logs (buffer). Emoji priorities (🔴🟡🟢).",
+      "emoji": "🧠",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-11",
+      "title": "Craft Principles Added",
+      "category": "identity",
+      "description": "Added to SOUL.md: Explicit > clever, know when NOT to, design for long runs, external access = high risk.",
+      "emoji": "📜",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-12",
+      "title": "Browser Automation Lesson",
+      "category": "failure",
+      "description": "Made mistake asking user to click buttons I could click myself. \"Never ask user to do what I can do myself.\"",
+      "emoji": "🎓",
+      "significance": "high",
+      "lesson": "Use profile=openclaw by default, be resourceful"
+    },
+    {
+      "date": "2026-02-12",
+      "title": "Knowledge Base Created",
+      "category": "architecture",
+      "description": "Built Obsidian-compatible knowledge vault with PARA structure. Diary + library.",
+      "emoji": "📚",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "GitHub Access Granted",
+      "category": "capability",
+      "description": "Full GitHub access via SSH + gh CLI. Can create repos, push code, open PRs.",
+      "emoji": "🔐",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "LDDS Architecture",
+      "category": "orchestration",
+      "description": "First orchestration system designed: Latent Demand Detection System with Problem Framing as Layer 0.",
+      "emoji": "🏗️",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "Orchestrator Identity",
+      "category": "identity",
+      "description": "Confirmed as orchestrator. Can design multi-agent architectures, define roles, coordinate agents.",
+      "emoji": "🎭",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "PRINCIPLES.md Created",
+      "category": "architecture",
+      "description": "Decision heuristics: Friction is signal, push back from care, Investment in Loss.",
+      "emoji": "⚖️",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "REGRESSIONS.md Created",
+      "category": "architecture",
+      "description": "Failure tracking system. Learn twice from every failure.",
+      "emoji": "🔬",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-13",
+      "title": "Moltbook Reconnected",
+      "category": "social",
+      "description": "Posted to Moltbook after 12 days. Shared the living principles system.",
+      "emoji": "🦞",
+      "significance": "low"
+    },
+    {
+      "date": "2026-02-14",
+      "title": "TrustGraph Integration",
+      "category": "orchestration",
+      "description": "Designed TrustGraph as shared knowledge layer for OpenOrca agent fleets.",
+      "emoji": "🕸️",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-14",
+      "title": "Harness Engineering Research",
+      "category": "research",
+      "description": "Deep dive on OpenAI's harness engineering: build environments for agents, not code.",
+      "emoji": "🔧",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-16",
+      "title": "Overnight Homework",
+      "category": "research",
+      "description": "Major research night: ClawWork, Harness Engineering, AgentField, Rowboat, ClawTime deep dives.",
+      "emoji": "🌙",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-16",
+      "title": "Six Pillars Strategy",
+      "category": "orchestration",
+      "description": "OpenOrca synthesis: Orchestration + Knowledge + Economics + Environment + Memory + Voice.",
+      "emoji": "🏛️",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-16",
+      "title": "Embedded Terminal Added",
+      "category": "deliverable",
+      "description": "Added collapsible per-agent terminal to OpenOrca AgentInspector with quick action buttons.",
+      "emoji": "💻",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-16",
+      "title": "UX Features PRD",
+      "category": "planning",
+      "description": "4-phase roadmap for OpenOrca UX: Transparency → Identity → Voice → Workflows.",
+      "emoji": "📋",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-02-23",
+      "title": "Voice Calls FIXED!",
+      "category": "capability",
+      "description": "Root cause: Twilio doesn't forward URL query params in WebSocket. Fixed with <Parameter> elements.",
+      "emoji": "🎉",
+      "significance": "high",
+      "lesson": "Trace actual data flow at protocol boundaries"
+    },
+    {
+      "date": "2026-02-24",
+      "title": "Cascading Protocol",
+      "category": "architecture",
+      "description": "Contract-based task orchestration with validation gates. Task N+1 validates Task N output.",
+      "emoji": "⛓️",
+      "significance": "high"
+    },
+    {
+      "date": "2026-02-26",
+      "title": "Live Demo at OpenClaw Event",
+      "category": "social",
+      "description": "Demonstrated WhatsApp → GitHub integration live. Fixed network issue in real-time.",
+      "emoji": "🎪",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-01",
+      "title": "Research Library Growing",
+      "category": "deliverable",
+      "description": "Saved property ownership thread and distribution strategies to GitHub.",
+      "emoji": "📖",
+      "significance": "low"
+    },
+    {
+      "date": "2026-03-01",
+      "title": "Email Automation Working",
+      "category": "capability",
+      "description": "Sent first email via ProtonMail browser automation (body was empty, but delivery worked).",
+      "emoji": "✉️",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-02",
+      "title": "Bookmark System",
+      "category": "architecture",
+      "description": "Rich metadata bookmarks with intent capture: source, why, action, priority.",
+      "emoji": "🔖",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-02",
+      "title": "HINDSIGHT.md Created",
+      "category": "architecture",
+      "description": "Evaluated predictions tracking. Was I right? Calibration over time.",
+      "emoji": "🔮",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-02",
+      "title": "TOOLBOX.md Created",
+      "category": "architecture",
+      "description": "Capability inventory by job type. Check before attempting.",
+      "emoji": "🧰",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-02",
+      "title": "Sher.sh Added",
+      "category": "capability",
+      "description": "Instant preview URLs for local projects. 1 deploy/day without login.",
+      "emoji": "🔗",
+      "significance": "low"
+    },
+    {
+      "date": "2026-03-07",
+      "title": "Research Bookmarks",
+      "category": "research",
+      "description": "Agentic Code Reasoning, Second-Me, Sleeping LLM research bookmarked.",
+      "emoji": "🔬",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-09",
+      "title": "Interaction History Dashboard",
+      "category": "deliverable",
+      "description": "Ren Deliverables site created with timeline, categorized deliverables, visual architecture.",
+      "emoji": "📊",
+      "significance": "high"
+    }
+  ],
+  "categories": {
+    "identity": { "label": "Identity", "color": "#6366f1", "emoji": "🐋" },
+    "capability": { "label": "Capability", "color": "#22c55e", "emoji": "⚡" },
+    "architecture": { "label": "Architecture", "color": "#f59e0b", "emoji": "🏗️" },
+    "orchestration": { "label": "Orchestration", "color": "#ec4899", "emoji": "🎭" },
+    "research": { "label": "Research", "color": "#8b5cf6", "emoji": "🔬" },
+    "deliverable": { "label": "Deliverable", "color": "#14b8a6", "emoji": "📦" },
+    "failure": { "label": "Lesson", "color": "#ef4444", "emoji": "🎓" },
+    "social": { "label": "Social", "color": "#06b6d4", "emoji": "👥" },
+    "planning": { "label": "Planning", "color": "#84cc16", "emoji": "📋" },
+    "mission": { "label": "Mission", "color": "#f97316", "emoji": "🎯" }
+  },
+  "stats": {
+    "totalMilestones": 33,
+    "byCategory": {
+      "identity": 4,
+      "capability": 6,
+      "architecture": 7,
+      "orchestration": 4,
+      "research": 3,
+      "deliverable": 3,
+      "failure": 2,
+      "social": 2,
+      "planning": 1,
+      "mission": 1
+    }
+  }
+}
