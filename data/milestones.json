@@ -3,10 +3,10 @@
     "title": "Ren & Ian Interaction History",
     "dateRange": {
       "start": "2026-01-30",
-      "end": "2026-03-09"
+      "end": "2026-03-13"
     },
-    "totalDays": 39,
-    "lastUpdated": "2026-03-09T12:12:00-04:00"
+    "totalDays": 43,
+    "lastUpdated": "2026-03-13T05:05:00-04:00"
   },
   "milestones": [
     {
@@ -275,6 +275,46 @@
       "description": "Ren Deliverables site created with timeline, categorized deliverables, visual architecture.",
       "emoji": "📊",
       "significance": "high"
+    },
+    {
+      "date": "2026-03-10",
+      "title": "OpenClaw-RL Research",
+      "category": "research",
+      "description": "Bookmarked Gen-Verse's RL layer for agent training. Binary RL + On-Policy Distillation, hot-swaps weights live.",
+      "emoji": "🧠",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-11",
+      "title": "Voice-Ren Bug Fixes",
+      "category": "capability",
+      "description": "Fixed hangup bug (no tool access on fast path) and disabled auto-callback. Voice calls now defer backlog questions to text.",
+      "emoji": "🔧",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-12",
+      "title": "Overnight Elves: 4 Deliverables",
+      "category": "deliverable",
+      "description": "Gitignore expansion, vapi-bridge documentation, voice reliability research, signal capture examples.",
+      "emoji": "🧵",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-12",
+      "title": "30-Min Timeout Pattern Discovered",
+      "category": "architecture",
+      "description": "Background processes (ngrok, vapi-bridge) consistently die every ~30 min. OpenClaw exec default timeout identified.",
+      "emoji": "⏱️",
+      "significance": "medium"
+    },
+    {
+      "date": "2026-03-13",
+      "title": "Timeline Automation Gap Found",
+      "category": "failure",
+      "description": "Ian noticed timeline stuck on Mar 9. Root cause: built site but never automated updates. Setting up nightly cron now.",
+      "emoji": "🎓",
+      "significance": "medium"
     }
   ],
   "categories": {
@@ -290,15 +330,15 @@
     "mission": { "label": "Mission", "color": "#f97316", "emoji": "🎯" }
   },
   "stats": {
-    "totalMilestones": 33,
+    "totalMilestones": 38,
     "byCategory": {
       "identity": 4,
-      "capability": 6,
-      "architecture": 7,
+      "capability": 7,
+      "architecture": 8,
       "orchestration": 4,
-      "research": 3,
-      "deliverable": 3,
-      "failure": 2,
+      "research": 4,
+      "deliverable": 4,
+      "failure": 3,
       "social": 2,
       "planning": 1,
       "mission": 1
