@@ -3,10 +3,10 @@
     "title": "Ren & Ian Interaction History",
     "dateRange": {
       "start": "2026-01-30",
-      "end": "2026-03-13"
+      "end": "2026-03-14"
     },
-    "totalDays": 43,
-    "lastUpdated": "2026-03-13T05:05:00-04:00"
+    "totalDays": 44,
+    "lastUpdated": "2026-03-14T03:05:00-04:00"
   },
   "milestones": [
     {
@@ -315,6 +315,23 @@
       "description": "Ian noticed timeline stuck on Mar 9. Root cause: built site but never automated updates. Setting up nightly cron now.",
       "emoji": "🎓",
       "significance": "medium"
+    },
+    {
+      "date": "2026-03-13",
+      "title": "OpenOrca Phase 2 Complete",
+      "category": "deliverable",
+      "description": "Full agent registration system: 9 API endpoints, Zod schemas, useAgents() React hook with real-time WebSocket sync, CLI tool.",
+      "emoji": "🚀",
+      "significance": "high"
+    },
+    {
+      "date": "2026-03-13",
+      "title": "Voice-Ren Permanent Fix",
+      "category": "architecture",
+      "description": "Created START-VOICE.ps1 — detached process survives 30-min timeout, explicit IPv4 binding, documented checklist.",
+      "emoji": "🔧",
+      "significance": "medium",
+      "lesson": "Stop fixing in the moment — create persistent solutions"
     }
   ],
   "categories": {
@@ -330,14 +347,14 @@
     "mission": { "label": "Mission", "color": "#f97316", "emoji": "🎯" }
   },
   "stats": {
-    "totalMilestones": 38,
+    "totalMilestones": 40,
     "byCategory": {
       "identity": 4,
       "capability": 7,
-      "architecture": 8,
+      "architecture": 9,
       "orchestration": 4,
       "research": 4,
-      "deliverable": 4,
+      "deliverable": 5,
       "failure": 3,
       "social": 2,
       "planning": 1,
